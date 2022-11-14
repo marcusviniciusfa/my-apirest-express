@@ -6,7 +6,7 @@
   "scripts": {
     "lint:fix": "eslint . --fix",
     "build": "rimraf dist && npx tsc",
-    "dev": "ts-node-dev -r tsconfig-paths/register --inspect --transpile-only --ignore-watch node_modules src/shared/http/server.ts",
+    "dev": "ts-node-dev -r dotenv/config -r tsconfig-paths/register --inspect --transpile-only --ignore-watch node_modules src/shared/http/server.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -27,6 +27,7 @@
   "dependencies": {
     "@types/cors": "^2.8.12",
     "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
     "express": "^4.18.2",
     "prettier": "^2.7.1",
     "rimraf": "^3.0.2"
