@@ -1,17 +1,13 @@
+import { Role } from '@roles/entities/Role'
 import { Router } from 'express'
-import { v4 as uuidv4 } from 'uuid'
 
 const rolesRouter = Router()
 
-const roles = []
+const roles: Role[] = []
 
 rolesRouter.post('/', (req, res) => {
   const { name } = req.body
-  const role = {
-    id: uuidv4(),
-    name,
-    created_at: new Date(),
-  }
+  const role: Role = new Role(name)
   roles.push(role)
   return res.status(201).json(role)
 })

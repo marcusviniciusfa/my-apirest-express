@@ -1,4 +1,4 @@
-import { AppError } from '@shared/errors/app-error'
+import { AppError } from '@shared/errors/AppError'
 import cors from 'cors'
 import express, { NextFunction, Request, Response } from 'express'
 import { routes } from './routes'
