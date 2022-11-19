@@ -1,21 +1,15 @@
 import { RolesRepository } from '@roles/repositories/RolesRepository'
-import { AppError } from '@shared/errors/AppError'
 import { Request, Response } from 'express'
+import { CreateRoleUseCase } from './CreateRoleUseCase'
 
 export class CreateRoleController {
   rolesRepository: RolesRepository
 
-  constructor() {
-    this.rolesRepository = new RolesRepository()
-  }
+  constructor(private createRoleUseCase: CreateRoleUseCase) {}
 
   handler(req: Request, res: Response): Response {
     const { name } = req.body
-    const roleAlreadyExixts = this.rolesRepository.findByNAme(name)
-    if (roleAlreadyExixts) {
-      throw new AppError('Role already exists')
-    }
-    const role = this.rolesRepository.create({ name })
+    const role = this.createRoleUseCase.execute({ name })
     return res.status(201).json(role)
   }
 }
