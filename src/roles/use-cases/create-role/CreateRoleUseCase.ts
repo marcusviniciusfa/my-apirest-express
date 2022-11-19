@@ -11,7 +11,7 @@ export class CreateRoleUseCase {
   constructor(private rolesRepository: RolesRepository) {}
 
   execute({ name }: CreateRoleDTO): Role {
-    const roleAlreadyExixts = this.rolesRepository.findByNAme(name)
+    const roleAlreadyExixts = this.rolesRepository.findByName(name)
     if (roleAlreadyExixts) {
       throw new AppError('Role already exists')
     }

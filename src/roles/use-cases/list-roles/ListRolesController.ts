@@ -6,7 +6,6 @@ export class ListRolesController {
 
   handler(_req: Request, res: Response) {
     const roles = this.listRolesUseCase.execute()
-    console.log(roles)
     return res.status(200).json(roles)
   }
 }

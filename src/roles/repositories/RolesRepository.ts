@@ -6,9 +6,17 @@ type CreateRoleDTO = {
 
 export class RolesRepository {
   private roles: Role[]
+  private static instance: RolesRepository
 
-  constructor() {
+  private constructor() {
     this.roles = []
+  }
+
+  static getInstance(): RolesRepository {
+    if (!RolesRepository.instance) {
+      RolesRepository.instance = new RolesRepository()
+    }
+    return RolesRepository.instance
   }
 
   create({ name }: CreateRoleDTO): Role {
@@ -17,7 +25,7 @@ export class RolesRepository {
     return role
   }
 
-  findByNAme(name: string): Role | undefined {
+  findByName(name: string): Role | undefined {
     return this.roles.find(role => role.name === name)
   }
 
