@@ -33,7 +33,9 @@
     "express": "^4.18.2",
     "prettier": "^2.7.1",
     "rimraf": "^3.0.2",
+    "sqlite3": "^5.1.2",
     "swagger-ui-express": "^4.6.0",
+    "typeorm": "^0.3.10",
     "uuid": "^9.0.0"
   }
 }
