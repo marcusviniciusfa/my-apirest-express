@@ -7,7 +7,7 @@
 
 ## Debug
 
-No VSCode use a tecla `F5` ou clique em "Executar e Depurar" na aba lateral esquerda. Em seguida clique na seta verde ("Iniciar a Depuração")
+No VSCode use a tecla `F5` ou clique em "Executar e Depurar" na aba lateral esquerda. Em seguida, clique na seta verde ("Iniciar a Depuração")
 
 ## Tópicos
 
