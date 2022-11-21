@@ -10,8 +10,8 @@ export class CreateRoleUseCase {
   // Injeção de Dependência/Inversão de Dependência
   constructor(private rolesRepository: RolesRepository) {}
 
-  execute({ name }: CreateRoleDTO): Role {
-    const roleAlreadyExixts = this.rolesRepository.findByName(name)
+  async execute({ name }: CreateRoleDTO): Promise<Role> {
+    const roleAlreadyExixts = await this.rolesRepository.findByName(name)
     if (roleAlreadyExixts) {
       throw new AppError('Role already exists')
     }

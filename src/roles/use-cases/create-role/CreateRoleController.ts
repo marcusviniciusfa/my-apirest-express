@@ -7,9 +7,9 @@ export class CreateRoleController {
 
   constructor(private createRoleUseCase: CreateRoleUseCase) {}
 
-  handler(req: Request, res: Response): Response {
+  async handler(req: Request, res: Response): Promise<Response> {
     const { name } = req.body
-    const role = this.createRoleUseCase.execute({ name })
+    const role = await this.createRoleUseCase.execute({ name })
     return res.status(201).json(role)
   }
 }

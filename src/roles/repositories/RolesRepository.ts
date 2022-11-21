@@ -12,7 +12,7 @@ type PaginateParams = {
   take: number
 }
 
-type RolesPaginateProperties = {
+export type RolesPaginateProperties = {
   per_page: number
   total: number
   current_page: number
@@ -40,11 +40,11 @@ export class RolesRepository {
 
   async create({ name }: CreateRoleDTO): Promise<Role> {
     const role = this.repository.create(new Role(name))
-    return await this.repository.save(role)
+    return this.repository.save(role)
   }
 
   async update(role: Role): Promise<Role> {
-    return await this.repository.save(role)
+    return this.repository.save(role)
   }
 
   async delete(role: Role): Promise<void> {
@@ -52,20 +52,15 @@ export class RolesRepository {
   }
 
   async findByName(name: string): Promise<Role | null> {
-    return await this.repository.findOneBy({ name })
+    return this.repository.findOneBy({ name })
   }
 
   async findById(id: string): Promise<Role | null> {
-    return await this.repository.findOneBy({ id })
+    return this.repository.findOneBy({ id })
   }
 
-  // eslint-disable-next-line prettier/prettier
-  async findAll({page, skip, take,}: PaginateParams): Promise<RolesPaginateProperties> {
-    const [roles, count] = await this.repository
-      .createQueryBuilder()
-      .skip(skip)
-      .take(take)
-      .getManyAndCount()
+  async findAll({ page, skip, take }: PaginateParams): Promise<RolesPaginateProperties> {
+    const [roles, count] = await this.repository.createQueryBuilder().skip(skip).take(take).getManyAndCount()
 
     const result: RolesPaginateProperties = {
       per_page: take,

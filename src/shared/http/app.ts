@@ -1,6 +1,7 @@
 import { AppError } from '@shared/errors/AppError'
 import cors from 'cors'
 import express, { NextFunction, Request, Response } from 'express'
+import 'express-async-errors'
 import swaggerUi from 'swagger-ui-express'
 import swaggerFile from '../../swagger.json'
 import { routes } from './routes'
@@ -11,6 +12,7 @@ app
   .use(express.json())
   .use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerFile))
   .use(routes)
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   .use((error: Error, _req: Request, res: Response, _next: NextFunction) => {
     console.error(error)
     if (error instanceof AppError) {
