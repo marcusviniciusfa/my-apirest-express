@@ -4,17 +4,22 @@
     // Para obter mais informações, acesse: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
     "configurations": [
-        {
-            "type": "node",
-            "request": "launch",
-            "name": "Iniciar o Programa",
-            "skipFiles": [
-                "<node_internals>/**"
-            ],
-            "program": "${workspaceFolder}/src/shared/http/server.ts",
-            "outFiles": [
-                "${workspaceFolder}/**/*.js"
-            ]
-        }
+      {
+        "command": "npm run dev",
+        "name": "Run npm dev",
+        "request": "launch",
+        "type": "node-terminal"
+      },
+      {
+        "envFile": "${workspaceFolder}/.env",
+        "env": { "PORT": "3000" },
+        "name": "Attach",
+        "port": 3000,
+        "request": "attach",
+        "skipFiles": [
+          "<node_internals>/**"
+        ],
+        "type": "node"
+      }
     ]
 }
