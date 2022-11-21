@@ -1,17 +1,36 @@
 import { Role } from '@roles/entities/Role'
+import { dataSource } from '@shared/typeorm'
+import { Repository } from 'typeorm'
 
 type CreateRoleDTO = {
   name: string
 }
 
+type PaginateParams = {
+  page: number
+  skip: number
+  take: number
+}
+
+type RolesPaginateProperties = {
+  per_page: number
+  total: number
+  current_page: number
+  data: Role[]
+}
+
 export class RolesRepository {
-  private roles: Role[]
+  private repository: Repository<Role>
   private static instance: RolesRepository
 
   private constructor() {
-    this.roles = []
+    this.repository = dataSource.getRepository(Role)
   }
 
+  /**
+   * Singleton Pattern
+   * @returns RolesRepository
+   */
   static getInstance(): RolesRepository {
     if (!RolesRepository.instance) {
       RolesRepository.instance = new RolesRepository()
@@ -19,17 +38,42 @@ export class RolesRepository {
     return RolesRepository.instance
   }
 
-  create({ name }: CreateRoleDTO): Role {
-    const role: Role = new Role(name)
-    this.roles.push(role)
-    return role
+  async create({ name }: CreateRoleDTO): Promise<Role> {
+    const role = this.repository.create(new Role(name))
+    return await this.repository.save(role)
   }
 
-  findByName(name: string): Role | undefined {
-    return this.roles.find(role => role.name === name)
+  async update(role: Role): Promise<Role> {
+    return await this.repository.save(role)
   }
 
-  findAll(): Role[] {
-    return this.roles
+  async delete(role: Role): Promise<void> {
+    await this.repository.remove(role)
+  }
+
+  async findByName(name: string): Promise<Role | null> {
+    return await this.repository.findOneBy({ name })
+  }
+
+  async findById(id: string): Promise<Role | null> {
+    return await this.repository.findOneBy({ id })
+  }
+
+  // eslint-disable-next-line prettier/prettier
+  async findAll({page, skip, take,}: PaginateParams): Promise<RolesPaginateProperties> {
+    const [roles, count] = await this.repository
+      .createQueryBuilder()
+      .skip(skip)
+      .take(take)
+      .getManyAndCount()
+
+    const result: RolesPaginateProperties = {
+      per_page: take,
+      current_page: page,
+      total: count,
+      data: roles,
+    }
+
+    return result
   }
 }

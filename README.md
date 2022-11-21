@@ -1,8 +1,16 @@
 # app-my-api
 
-## Notes
+## Tópicos
 
-### TypeORM Commands
+- [ ] Entender o que é, e como funciona uma API Restful
+- [ ] Construir API Restful Javascript NodeJS com ExpressJS e Typescript
+- [ ] Implementar o TypeORM em projetos NodeJS com bancos de dados relacionais
+- [ ] Documentar API Restful com o Swagger (Open API)
+- [ ] Implementar autenticação com token de acesso e refresh token (JWT)
+
+## Anotações
+
+### TypeORM CLI
 
 ~~~bash
 # samples
