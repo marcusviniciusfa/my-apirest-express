@@ -7,9 +7,9 @@ type CreateRoleDTO = {
 }
 
 type PaginateParams = {
-  page: number
-  skip: number
-  take: number
+  page: number // Quantidade de páginas existentes
+  skip: number // Quantidade de documentos para pular
+  take: number // Quantidade de documentos buscados
 }
 
 export type RolesPaginateProperties = {

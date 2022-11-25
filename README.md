@@ -17,6 +17,10 @@ No VSCode use a tecla `F5` ou clique em "Executar e Depurar" na aba lateral esqu
 - [ ] Documentar API Restful com o Swagger (Open API)
 - [ ] Implementar autenticação com token de acesso e refresh token (JWT)
 
+### Extra
+
+- [ ] Adicionar testes unitários e end-to-end na aplicação
+
 ## Anotações
 
 ### TypeORM CLI
