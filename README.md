@@ -13,12 +13,13 @@ No VSCode use a tecla `F5` ou clique em "Executar e Depurar" na aba lateral esqu
 
 - [ ] Entender o que é, e como funciona uma API Restful
 - [ ] Construir API Restful Javascript NodeJS com ExpressJS e Typescript
-- [ ] Implementar o TypeORM em projetos NodeJS com bancos de dados relacionais
-- [ ] Documentar API Restful com o Swagger (Open API)
+- [ ] Implementar o [TypeORM](https://typeorm.io/) em projetos NodeJS com bancos de dados relacionais
+- [ ] Documentar API Restful com o Swagger ([Open API](https://github.com/OAI/OpenAPI-Specification/blob/main/versions/3.0.3.md))
 - [ ] Implementar autenticação com token de acesso e refresh token (JWT)
 
 ### Extra
 
+- [ ] Validação de dos dados recebidos pela API usando o [Ajv JSON schema validator](https://ajv.js.org/)
 - [ ] Adicionar testes unitários e end-to-end na aplicação
 
 ## Anotações
