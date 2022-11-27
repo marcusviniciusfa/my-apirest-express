@@ -1,53 +1,400 @@
 {
-    "openapi":"3.0.3",
-    "info": {
-      "title":"App My Api",
-      "version":"1.0.0",
-      "description": "App My Api Documentation",
-      "contact": {
-        "name": "Marcus Vinicius",
-        "email": "marcusviniciusfabr@gmail.com"
-      }
-    },
-    "paths": {
-      "/roles": {
-        "post": {
-          "tags": ["Role"],
-          "summary": "Create a role",
-          "description": "Create a new role",
-          "requestBody": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "name": {
-                      "type": "string"
+  "openapi":"3.0.3",
+  "info":{
+    "title":"Swagger App My Api - OpenAPI 3.0",
+    "version":"1.0.0",
+    "description":"This is a sample App My Api Server based on the OpenAPI 3.0 specification",
+    "contact":{
+      "name":"Marcus Vinicius",
+      "email":"marcusviniciusfabr@gmail.com"
+    }
+  },
+  "tags":[
+    {
+      "name":"role",
+      "description":"Everything about Roles"
+    }
+  ],
+  "paths":{
+    "/roles":{
+      "get":{
+        "tags":[
+          "role"
+        ],
+        "summary":"List all roles",
+        "description":"Return all roles paginated",
+        "parameters":[
+          {
+            "name":"page",
+            "in":"query",
+            "description":"Current page",
+            "required": true
+          },
+          {
+            "name":"limit",
+            "in":"query",
+            "description":"Number of documents per page",
+            "required": true
+          }
+        ],
+        "responses":{
+          "200":{
+            "description":"Ok",
+            "content":{
+              "application/json":{
+                "schema":{
+                  "type":"object",
+                  "properties":{
+                    "per_page":{
+                      "type":"number",
+                      "example":10
+                    },
+                    "current_page":{
+                      "type":"number",
+                      "example":1
+                    },
+                    "total":{
+                      "type":"number",
+                      "example":11
+                    },
+                    "data":{
+                      "type":"array",
+                      "items":{
+                        "$ref":"#/components/schemas/Role"
+                      }
                     }
                   }
                 }
               }
             }
           },
-          "responses": {
-            "201": {
-              "description": "Role created"
-            },
-            "400": {
-              "description": "Role already exists"
+          "400":{
+            "description":"Bad request",
+            "content":{
+              "application/json":{
+                "schema":{
+                  "type":"object",
+                  "properties":{
+                    "status":{
+                      "type":"string",
+                      "example":"error"
+                    },
+                    "message":{
+                      "type":"string",
+                      "example":"data/page must match pattern \"^[0-9]+\""
+                    }
+                  }
+                }
+              }
             }
+          },
+          "500":{
+            "description":"Internal server error"
           }
-        },
-        "get" :{
-          "tags": ["Role"],
-          "summary": "List all roles",
-          "description": "Return all roles paginated",
-          "responses": {
-            "200": {
-              "description": "Success"
+        }
+      },
+      "post":{
+        "tags":[
+          "role"
+        ],
+        "summary":"Create a new role",
+        "description":"Create a new role if it doesn't exist yet",
+        "requestBody":{
+          "content":{
+            "application/json":{
+              "schema":{
+                "type":"object",
+                "properties":{
+                  "name":{
+                    "type":"string",
+                    "example":"Admin"
+                  }
+                }
+              }
             }
+          },
+          "required":true
+        },
+        "responses":{
+          "201":{
+            "description":"Created",
+            "content":{
+              "application/json":{
+                "schema":{
+                  "$ref":"#/components/schemas/Role"
+                }
+              }
+            }
+          },
+          "400":{
+            "description":"Bad request",
+            "content":{
+              "application/json":{
+                "schema":{
+                  "type":"object",
+                  "properties":{
+                    "status":{
+                      "type":"string",
+                      "example":"error"
+                    },
+                    "message":{
+                      "type":"string",
+                      "example":"Role already exists"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500":{
+            "description":"Internal server error"
+          }
+        }
+      }
+    },
+    "/roles/{id}":{
+      "get":{
+        "tags":[
+          "role"
+        ],
+        "summary":"Show a role",
+        "description":"Return a role by Id",
+        "parameters":[
+          {
+            "name":"id",
+            "in":"path",
+            "description":"Role Id",
+            "required": true
+          }
+        ],
+        "responses":{
+          "200":{
+            "description":"Ok",
+            "content":{
+              "application/json":{
+                "schema":{
+                  "$ref":"#/components/schemas/Role"
+                }
+              }
+            }
+          },
+          "400":{
+            "description":"Bad request",
+            "content":{
+              "application/json":{
+                "schema":{
+                  "type":"object",
+                  "properties":{
+                    "status":{
+                      "type":"string",
+                      "example":"error"
+                    },
+                    "message":{
+                      "type":"string",
+                      "example":"data/id must match pattern \"^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$\""
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404":{
+            "description":"Not found",
+            "content":{
+              "application/json":{
+                "schema":{
+                  "type":"object",
+                  "properties":{
+                    "status":{
+                      "type":"string",
+                      "example":"error"
+                    },
+                    "message":{
+                      "type":"string",
+                      "example":"Role not found"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500":{
+            "description":"Internal server error"
+          }
+        }
+      },
+      "put":{
+        "tags":[
+          "role"
+        ],
+        "summary":"Update an existing role",
+        "description":"Update an existing role by Id",
+        "parameters":[
+          {
+            "name":"id",
+            "in":"path",
+            "description":"Role Id",
+            "required": true
+          }
+        ],
+        "requestBody":{
+          "content":{
+            "application/json":{
+              "schema":{
+                "type":"object",
+                "properties":{
+                  "name":{
+                    "type":"string",
+                    "example":"Admin"
+                  }
+                }
+              }
+            }
+          },
+          "required":true
+        },
+        "responses":{
+          "200":{
+            "description":"Ok",
+            "content":{
+              "application/json":{
+                "schema":{
+                  "$ref":"#/components/schemas/Role"
+                }
+              }
+            }
+          },
+          "400":{
+            "description":"Bad request",
+            "content":{
+              "application/json":{
+                "schema":{
+                  "type":"object",
+                  "properties":{
+                    "status":{
+                      "type":"string",
+                      "example":"error"
+                    },
+                    "message":{
+                      "type":"string",
+                      "example":"data/id must match pattern \"^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$\""
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404":{
+            "description":"Not found",
+            "content":{
+              "application/json":{
+                "schema":{
+                  "type":"object",
+                  "properties":{
+                    "status":{
+                      "type":"string",
+                      "example":"error"
+                    },
+                    "message":{
+                      "type":"string",
+                      "example":"Role not found"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500":{
+            "description":"Internal server error"
+          }
+        }
+      },
+      "delete":{
+        "tags":[
+          "role"
+        ],
+        "summary":"Delete an existing role",
+        "description":"Delete an existing role by Id",
+        "parameters":[
+          {
+            "name":"id",
+            "in":"path",
+            "description":"Role Id",
+            "required": true
+          }
+        ],
+        "responses":{
+          "204":{
+            "description":"No content"
+          },
+          "400":{
+            "description":"Bad request",
+            "content":{
+              "application/json":{
+                "schema":{
+                  "type":"object",
+                  "properties":{
+                    "status":{
+                      "type":"string",
+                      "example":"error"
+                    },
+                    "message":{
+                      "type":"string",
+                      "example":"data/id must match pattern \"^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$\""
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404":{
+            "description":"Not found",
+            "content":{
+              "application/json":{
+                "schema":{
+                  "type":"object",
+                  "properties":{
+                    "status":{
+                      "type":"string",
+                      "example":"error"
+                    },
+                    "message":{
+                      "type":"string",
+                      "example":"Role not found"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500":{
+            "description":"Internal server error"
+          }
+        }
+      }
+    }
+  },
+  "components":{
+    "schemas":{
+      "Role":{
+        "type":"object",
+        "properties":{
+          "id":{
+            "type":"string",
+            "format":"uuid",
+            "example":"f408156b-af0b-46da-916a-63488bcef1ae"
+          },
+          "name":{
+            "type":"string",
+            "example":"Admin"
+          },
+          "created_at":{
+            "type":"string",
+            "format":"Date",
+            "example":"2022-11-26T23:11:23.346Z"
           }
         }
       }
     }
   }
+}
