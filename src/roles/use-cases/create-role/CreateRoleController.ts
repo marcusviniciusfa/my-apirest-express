@@ -1,11 +1,13 @@
-import { RolesRepository } from '@roles/repositories/RolesRepository'
 import { Request, Response } from 'express'
+import { container } from 'tsyringe'
 import { CreateRoleUseCase } from './CreateRoleUseCase'
 
 export class CreateRoleController {
-  rolesRepository: RolesRepository
+  private createRoleUseCase: CreateRoleUseCase
 
-  constructor(private createRoleUseCase: CreateRoleUseCase) {}
+  constructor() {
+    this.createRoleUseCase = container.resolve(CreateRoleUseCase)
+  }
 
   async handler(req: Request, res: Response): Promise<Response> {
     const { name } = req.body

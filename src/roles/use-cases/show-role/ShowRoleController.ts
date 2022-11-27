@@ -1,8 +1,13 @@
 import { Request, Response } from 'express'
+import { container } from 'tsyringe'
 import { ShowRoleUseCase } from './ShowRoleUseCase'
 
 export class ShowRoleController {
-  constructor(private showRoleUseCase: ShowRoleUseCase) {}
+  private showRoleUseCase: ShowRoleUseCase
+
+  constructor() {
+    this.showRoleUseCase = container.resolve(ShowRoleUseCase)
+  }
 
   async handler(req: Request, res: Response) {
     const { id } = req.params

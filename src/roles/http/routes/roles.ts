@@ -1,11 +1,18 @@
-import { createRolesController } from '@roles/use-cases/create-role'
-import { deleteRolesController } from '@roles/use-cases/delete-role'
-import { listRolesController } from '@roles/use-cases/list-roles'
-import { showRolesController } from '@roles/use-cases/show-role'
-import { updateRolesController } from '@roles/use-cases/update-role'
+import { CreateRoleController } from '@roles/use-cases/create-role/CreateRoleController'
+import { DeleteRoleController } from '@roles/use-cases/delete-role/DeleteRoleController'
+import { ListRolesController } from '@roles/use-cases/list-roles/ListRolesController'
+import { ShowRoleController } from '@roles/use-cases/show-role/ShowRoleController'
+import { UpdateRoleController } from '@roles/use-cases/update-role/UpdateRoleController'
 import { POSITIVE_NUMBER_PATTERN, ROLE_NAME_PATTERN, UUID_PATTERN } from '@shared/constants'
 import { validator } from '@shared/validator'
 import { Router } from 'express'
+import { container } from 'tsyringe'
+
+const createRolesController = container.resolve(CreateRoleController)
+const deleteRolesController = container.resolve(DeleteRoleController)
+const listRolesController = container.resolve(ListRolesController)
+const showRolesController = container.resolve(ShowRoleController)
+const updateRolesController = container.resolve(UpdateRoleController)
 
 const rolesRouter = Router()
 

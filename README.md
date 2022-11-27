@@ -16,6 +16,7 @@ No VSCode use a tecla `F5` ou clique em "Executar e Depurar" na aba lateral esqu
 - [ ] Implementar o [TypeORM](https://typeorm.io/) em projetos NodeJS com bancos de dados relacionais
 - [ ] Documentar API Restful com o Swagger ([Open API](https://github.com/OAI/OpenAPI-Specification/blob/main/versions/3.0.3.md))
 - [ ] Implementar autenticação com token de acesso e refresh token (JWT)
+- [ ] Inversão de dependências com [tsyringe](https://github.com/Microsoft/tsyringe#readme)
 
 ### Extra
 

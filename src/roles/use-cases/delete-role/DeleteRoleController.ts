@@ -1,8 +1,13 @@
 import { Request, Response } from 'express'
+import { container } from 'tsyringe'
 import { DeleteRoleUseCase } from './DeleteRoleUseCase'
 
 export class DeleteRoleController {
-  constructor(private deleteRoleUseCase: DeleteRoleUseCase) {}
+  private deleteRoleUseCase: DeleteRoleUseCase
+
+  constructor() {
+    this.deleteRoleUseCase = container.resolve(DeleteRoleUseCase)
+  }
 
   async handler(req: Request, res: Response) {
     const { id } = req.params

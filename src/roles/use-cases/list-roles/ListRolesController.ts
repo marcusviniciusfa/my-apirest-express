@@ -1,11 +1,16 @@
 import { Request, Response } from 'express'
+import { container } from 'tsyringe'
 import { ListRolesUseCase } from './ListRolesUseCase'
 
 const DEFAULT_PAGE = 1
 const DEFAULT_LIMIT = 15
 
 export class ListRolesController {
-  constructor(private listRolesUseCase: ListRolesUseCase) {}
+  private listRolesUseCase: ListRolesUseCase
+
+  constructor() {
+    this.listRolesUseCase = container.resolve(ListRolesUseCase)
+  }
 
   async handler(req: Request, res: Response) {
     const page = req.query.page && !isNaN(Number(req.query.page)) && Number(req.query.page) > 0 ? Number(req.query.page) : DEFAULT_PAGE
