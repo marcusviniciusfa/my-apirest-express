@@ -1,8 +1,9 @@
+import { DeleteRoleUseCase } from '@roles/use-cases/DeleteRoleUseCase'
 import { Request, Response } from 'express'
 import { container } from 'tsyringe'
-import { DeleteRoleUseCase } from './DeleteRoleUseCase'
+import { IRolesController } from './IRolesController'
 
-export class DeleteRoleController {
+export class DeleteRoleController implements IRolesController {
   private deleteRoleUseCase: DeleteRoleUseCase
 
   constructor() {

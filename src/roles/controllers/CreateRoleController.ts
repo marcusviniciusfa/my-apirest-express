@@ -1,8 +1,9 @@
+import { CreateRoleUseCase } from '@roles/use-cases/CreateRoleUseCase'
 import { Request, Response } from 'express'
 import { container } from 'tsyringe'
-import { CreateRoleUseCase } from './CreateRoleUseCase'
+import { IRolesController } from './IRolesController'
 
-export class CreateRoleController {
+export class CreateRoleController implements IRolesController {
   private createRoleUseCase: CreateRoleUseCase
 
   constructor() {

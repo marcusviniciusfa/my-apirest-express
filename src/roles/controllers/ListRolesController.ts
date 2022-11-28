@@ -1,11 +1,12 @@
+import { ListRolesUseCase } from '@roles/use-cases/ListRolesUseCase'
 import { Request, Response } from 'express'
 import { container } from 'tsyringe'
-import { ListRolesUseCase } from './ListRolesUseCase'
+import { IRolesController } from './IRolesController'
 
 const DEFAULT_PAGE = 1
 const DEFAULT_LIMIT = 15
 
-export class ListRolesController {
+export class ListRolesController implements IRolesController {
   private listRolesUseCase: ListRolesUseCase
 
   constructor() {

@@ -1,8 +1,9 @@
+import { UpdateRoleUseCase } from '@roles/use-cases/UpdateRoleUseCase'
 import { Request, Response } from 'express'
 import { container } from 'tsyringe'
-import { UpdateRoleUseCase } from './UpdateRoleUseCase'
+import { IRolesController } from './IRolesController'
 
-export class UpdateRoleController {
+export class UpdateRoleController implements IRolesController {
   private updateRoleUseCase: UpdateRoleUseCase
 
   constructor() {
