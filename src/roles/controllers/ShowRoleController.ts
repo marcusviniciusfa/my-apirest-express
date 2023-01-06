@@ -1,4 +1,4 @@
-import { ShowRoleUseCase } from '@roles/use-cases/ShowRoleUseCase'
+import { ShowRoleUseCase } from '@/roles/use-cases/ShowRoleUseCase'
 import { Request, Response } from 'express'
 import { container } from 'tsyringe'
 import { IRolesController } from './IRolesController'

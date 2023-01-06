@@ -1,4 +1,4 @@
-import { DeleteRoleUseCase } from '@roles/use-cases/DeleteRoleUseCase'
+import { DeleteRoleUseCase } from '@/roles/use-cases/DeleteRoleUseCase'
 import { Request, Response } from 'express'
 import { container } from 'tsyringe'
 import { IRolesController } from './IRolesController'

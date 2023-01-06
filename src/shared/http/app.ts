@@ -1,5 +1,5 @@
-import '@shared/container'
-import { AppError } from '@shared/errors/AppError'
+import '@/shared/container'
+import { AppError } from '@/shared/errors/AppError'
 import cors from 'cors'
 import express, { NextFunction, Request, Response } from 'express'
 import 'express-async-errors'

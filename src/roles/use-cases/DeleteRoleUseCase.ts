@@ -1,5 +1,5 @@
-import { IRolesRepository } from '@roles/repositories/IRolesRepository'
-import { AppError } from '@shared/errors/AppError'
+import { IRolesRepository } from '@/roles/repositories/IRolesRepository'
+import { AppError } from '@/shared/errors/AppError'
 import { inject, injectable } from 'tsyringe'
 
 type DeleteRoleParams = {

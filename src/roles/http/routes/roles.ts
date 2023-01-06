@@ -1,6 +1,6 @@
-import { IRolesController } from '@roles/controllers/IRolesController'
-import { POSITIVE_NUMBER_PATTERN, ROLE_NAME_PATTERN, UUID_PATTERN } from '@shared/constants'
-import { validator } from '@shared/validator'
+import { IRolesController } from '@/roles/controllers/IRolesController'
+import { POSITIVE_NUMBER_PATTERN, ROLE_NAME_PATTERN, UUID_PATTERN } from '@/shared/constants'
+import { validator } from '@/shared/validator'
 import { Router } from 'express'
 import { container } from 'tsyringe'
 

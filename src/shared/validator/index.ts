@@ -1,4 +1,4 @@
-import { AppError } from '@shared/errors/AppError'
+import { AppError } from '@/shared/errors/AppError'
 import Ajv from 'ajv'
 const ajv = new Ajv({ messages: true })
 

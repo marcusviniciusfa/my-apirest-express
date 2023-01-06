@@ -1,4 +1,4 @@
-import { Role } from '@roles/entities/Role'
+import { Role } from '@/roles/entities/Role'
 import { DataSource } from 'typeorm'
 import { CreateRolesTable1668986011952 } from './migrations/1668986011952-CreateRolesTable'
 

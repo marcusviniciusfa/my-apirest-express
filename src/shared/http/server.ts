@@ -1,4 +1,4 @@
-import { dataSource } from '@shared/typeorm'
+import { dataSource } from '@/shared/typeorm'
 import 'reflect-metadata'
 import { app } from './app'
 

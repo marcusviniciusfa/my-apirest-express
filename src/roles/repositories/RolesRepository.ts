@@ -1,5 +1,5 @@
-import { Role } from '@roles/entities/Role'
-import { dataSource } from '@shared/typeorm'
+import { Role } from '@/roles/entities/Role'
+import { dataSource } from '@/shared/typeorm'
 import { Repository } from 'typeorm'
 import { CreateRoleDTO, IRolesRepository, PaginateParams, RolesPaginateProperties } from './IRolesRepository'
 

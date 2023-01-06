@@ -1,4 +1,4 @@
-import { UpdateRoleUseCase } from '@roles/use-cases/UpdateRoleUseCase'
+import { UpdateRoleUseCase } from '@/roles/use-cases/UpdateRoleUseCase'
 import { Request, Response } from 'express'
 import { container } from 'tsyringe'
 import { IRolesController } from './IRolesController'
