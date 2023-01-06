@@ -1,5 +1,5 @@
+import { randomUUID } from 'node:crypto'
 import { Column, CreateDateColumn, Entity, PrimaryColumn } from 'typeorm'
-import { v4 as uuidv4 } from 'uuid'
 
 @Entity('roles')
 export class Role {
@@ -13,7 +13,7 @@ export class Role {
   created_at: Date
 
   constructor(name: string) {
-    this.id = uuidv4()
+    this.id = randomUUID()
     this.created_at = new Date()
     this.name = name
   }
