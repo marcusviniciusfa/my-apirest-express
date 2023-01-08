@@ -1,6 +1,6 @@
 import { Role } from '@/roles/entities/Role'
 import { IRolesRepository } from '@/roles/repositories/IRolesRepository'
-import { AppError } from '@/shared/errors/AppError'
+import { NotFoundError } from '@/shared/errors/NotFoundError'
 import { inject, injectable } from 'tsyringe'
 
 type ShowRoleParams = {
@@ -14,7 +14,7 @@ export class ShowRoleUseCase {
   async execute({ id }: ShowRoleParams): Promise<Role> {
     const role = await this.rolesRepository.findById(id)
     if (!role) {
-      throw new AppError('Role not found', 404)
+      throw new NotFoundError('role not found 🔎')
     }
     return role
   }

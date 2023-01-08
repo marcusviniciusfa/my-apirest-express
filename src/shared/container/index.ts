@@ -1,2 +1,1 @@
-import '@/roles/container';
-
+import '@/roles/container'

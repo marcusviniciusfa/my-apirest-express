@@ -4,7 +4,7 @@ export type CreateRoleDTO = {
   name: string
 }
 
-export type PaginateParams = {
+export type RolesPaginateParams = {
   page: number
   skip: number
   take: number
@@ -23,5 +23,5 @@ export interface IRolesRepository {
   delete(role: Role): Promise<void>
   findByName(name: string): Promise<Role | null>
   findById(id: string): Promise<Role | null>
-  findAll({ page, skip, take }: PaginateParams): Promise<RolesPaginateProperties>
+  findAll({ page, skip, take }: RolesPaginateParams): Promise<RolesPaginateProperties>
 }

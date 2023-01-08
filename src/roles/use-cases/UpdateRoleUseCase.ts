@@ -1,6 +1,7 @@
 import { Role } from '@/roles/entities/Role'
 import { IRolesRepository } from '@/roles/repositories/IRolesRepository'
-import { AppError } from '@/shared/errors/AppError'
+import { BadRequestError } from '@/shared/errors/BadRequestError'
+import { NotFoundError } from '@/shared/errors/NotFoundError'
 import { inject, injectable } from 'tsyringe'
 
 type UpdateRoleParams = {
@@ -15,11 +16,11 @@ export class UpdateRoleUseCase {
   async execute({ id, name }: UpdateRoleParams): Promise<Role> {
     const role = await this.rolesRepository.findById(id)
     if (!role) {
-      throw new AppError('Role not found', 404)
+      throw new NotFoundError('role not found 🔎')
     }
     const roleAlreadyExixts = await this.rolesRepository.findByName(name)
     if (roleAlreadyExixts && role.id !== roleAlreadyExixts.id) {
-      throw new AppError('Role already exists')
+      throw new BadRequestError('role already exists ❌')
     }
     return this.rolesRepository.update({ ...role, name })
   }

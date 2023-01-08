@@ -1,12 +1,17 @@
 import { rolesRouter } from '@/roles/http/routes/roles'
-import { Router } from 'express'
+import { NotFoundError } from '@/shared/errors/NotFoundError'
+import { NextFunction, Request, Response, Router } from 'express'
 
 const routes = Router()
 
-routes.get('/', (_req, res) => {
+routes.get('/', (_req: Request, res: Response) => {
   return res.json({ message: 'hello' })
 })
 
 routes.use('/roles', rolesRouter)
+
+routes.use('*', (req: Request, _res: Response, next: NextFunction) => {
+  next(new NotFoundError(`requested path ${req.originalUrl} not found 🔎`))
+})
 
 export { routes }

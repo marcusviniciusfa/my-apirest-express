@@ -11,6 +11,6 @@ import { container } from 'tsyringe'
 container.registerSingleton<IRolesRepository>('RolesRepository', RolesRepository)
 container.registerSingleton<IRolesController>('CreateRoleController', CreateRoleController)
 container.registerSingleton<IRolesController>('DeleteRoleController', DeleteRoleController)
-container.registerSingleton<IRolesController>('ListRoleController', ListRolesController)
+container.registerSingleton<IRolesController>('ListRolesController', ListRolesController)
 container.registerSingleton<IRolesController>('ShowRoleController', ShowRoleController)
 container.registerSingleton<IRolesController>('UpdateRoleController', UpdateRoleController)

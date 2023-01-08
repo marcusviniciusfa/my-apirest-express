@@ -1,7 +1,7 @@
 import { Role } from '@/roles/entities/Role'
 import { dataSource } from '@/shared/typeorm'
 import { Repository } from 'typeorm'
-import { CreateRoleDTO, IRolesRepository, PaginateParams, RolesPaginateProperties } from './IRolesRepository'
+import { CreateRoleDTO, IRolesRepository, RolesPaginateParams, RolesPaginateProperties } from './IRolesRepository'
 
 export class RolesRepository implements IRolesRepository {
   private repository: Repository<Role>
@@ -31,7 +31,7 @@ export class RolesRepository implements IRolesRepository {
     return this.repository.findOneBy({ id })
   }
 
-  async findAll({ page, skip, take }: PaginateParams): Promise<RolesPaginateProperties> {
+  async findAll({ page, skip, take }: RolesPaginateParams): Promise<RolesPaginateProperties> {
     const [roles, count] = await this.repository.createQueryBuilder().skip(skip).take(take).getManyAndCount()
 
     const result: RolesPaginateProperties = {
