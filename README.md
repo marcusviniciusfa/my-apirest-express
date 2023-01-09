@@ -20,7 +20,7 @@ No VSCode use a tecla `F5` ou clique em "Executar e Depurar" na aba lateral esqu
 
 ### Extra
 
-- [x] Validação de dos dados recebidos pela API usando o [Ajv JSON schema validator](https://ajv.js.org/)
+- [x] Validação dos dados recebidos pela API usando o [Ajv JSON schema validator](https://ajv.js.org/)
 - [x] Middleware de tratamento de erros personalizado
 - [ ] Adicionar testes unitários e end-to-end na aplicação
 
