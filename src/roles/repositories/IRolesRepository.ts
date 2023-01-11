@@ -1,16 +1,16 @@
 import { Role } from '@/roles/entities/Role'
 
-export type CreateRoleDTO = {
+export interface CreateRoleDTO {
   name: string
 }
 
-export type RolesPaginateParams = {
+export interface RolesPaginateParams {
   page: number
   skip: number
   take: number
 }
 
-export type RolesPaginateProperties = {
+export interface RolesPaginateProperties {
   per_page: number
   total: number
   current_page: number
