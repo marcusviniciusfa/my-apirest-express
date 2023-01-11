@@ -1,5 +1,6 @@
+import { Role } from '@/roles/entities/Role'
 import { randomUUID } from 'node:crypto'
-import { Column, Entity, PrimaryColumn } from 'typeorm'
+import { Column, Entity, ManyToOne, PrimaryColumn } from 'typeorm'
 
 @Entity('users')
 export class User {
@@ -23,6 +24,11 @@ export class User {
 
   @Column()
   created_at: Date
+
+  @ManyToOne(() => Role, {
+    cascade: true,
+  })
+  role: Role
 
   constructor() {
     this.id = randomUUID()
