@@ -1,7 +1,7 @@
 import { IRolesRepository, RolesPaginateProperties } from '@/roles/repositories/IRolesRepository'
 import { inject, injectable } from 'tsyringe'
 
-type ListRolesUseCaseParams = {
+interface ListRolesUseCaseParams {
   page: number
   limit: number
 }

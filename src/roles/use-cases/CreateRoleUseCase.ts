@@ -3,7 +3,7 @@ import { IRolesRepository } from '@/roles/repositories/IRolesRepository'
 import { BadRequestError } from '@/shared/errors/BadRequestError'
 import { inject, injectable } from 'tsyringe'
 
-type CreateRoleDTO = {
+interface CreateRoleDTO {
   name: string
 }
 

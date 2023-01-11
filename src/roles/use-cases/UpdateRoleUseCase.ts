@@ -4,7 +4,7 @@ import { BadRequestError } from '@/shared/errors/BadRequestError'
 import { NotFoundError } from '@/shared/errors/NotFoundError'
 import { inject, injectable } from 'tsyringe'
 
-type UpdateRoleParams = {
+interface UpdateRoleParams {
   id: string
   name: string
 }

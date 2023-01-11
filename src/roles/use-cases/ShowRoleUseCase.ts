@@ -3,7 +3,7 @@ import { IRolesRepository } from '@/roles/repositories/IRolesRepository'
 import { NotFoundError } from '@/shared/errors/NotFoundError'
 import { inject, injectable } from 'tsyringe'
 
-type ShowRoleParams = {
+interface ShowRoleParams {
   id: string
 }
 
