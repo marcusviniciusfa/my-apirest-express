@@ -4,9 +4,7 @@ import { Repository } from 'typeorm'
 import { CreateRoleDTO, IRolesRepository, RolesPaginateParams, RolesPaginateProperties } from './IRolesRepository'
 
 export class RolesRepository implements IRolesRepository {
-  private repository: Repository<Role>
-
-  constructor() {
+  constructor(private readonly repository: Repository<Role>) {
     this.repository = dataSource.getRepository(Role)
   }
 
