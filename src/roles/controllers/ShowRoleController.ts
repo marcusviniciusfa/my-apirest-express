@@ -10,7 +10,7 @@ export class ShowRoleController implements IRolesController {
     this.showRoleUseCase = container.resolve(ShowRoleUseCase)
   }
 
-  async handler(req: Request, res: Response) {
+  async handler(req: Request, res: Response): Promise<Response> {
     const { id } = req.params
     const role = await this.showRoleUseCase.execute({ id })
     return res.status(200).json(role)

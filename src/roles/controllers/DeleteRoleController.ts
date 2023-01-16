@@ -10,7 +10,7 @@ export class DeleteRoleController implements IRolesController {
     this.deleteRoleUseCase = container.resolve(DeleteRoleUseCase)
   }
 
-  async handler(req: Request, res: Response) {
+  async handler(req: Request, res: Response): Promise<Response> {
     const { id } = req.params
     await this.deleteRoleUseCase.execute({ id })
     return res.status(204).end()

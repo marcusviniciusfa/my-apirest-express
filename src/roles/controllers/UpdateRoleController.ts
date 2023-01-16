@@ -10,7 +10,7 @@ export class UpdateRoleController implements IRolesController {
     this.updateRoleUseCase = container.resolve(UpdateRoleUseCase)
   }
 
-  async handler(req: Request, res: Response) {
+  async handler(req: Request, res: Response): Promise<Response> {
     const { id } = req.params
     const { name } = req.body
     const role = await this.updateRoleUseCase.execute({ id, name })

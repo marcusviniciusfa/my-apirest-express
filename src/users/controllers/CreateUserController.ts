@@ -10,9 +10,9 @@ export class CreateUserController implements IUsersController {
     this.createUserUseCase = container.resolve(CreateUserUseCase)
   }
 
-  async handler(req: Request, res: Response): Promise<any> {
+  async handler(req: Request, res: Response): Promise<Response> {
     const { name, email, password, isAdmin, roleId } = req.body
     const user = await this.createUserUseCase.execute({ name, email, password, isAdmin, roleId })
-    return res.status(200).json(user)
+    return res.status(201).json(user)
   }
 }
