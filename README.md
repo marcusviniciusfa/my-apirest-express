@@ -3,7 +3,8 @@
 ## Executar
 
 1. `npm install`
-2. `npm run dev`
+2. `mv sample.env .env` e preencha a variável `ENCRYPTION_KEY`
+3. `npm run dev`
 
 ## Debug
 
