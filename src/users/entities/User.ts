@@ -30,8 +30,7 @@ export class User {
   })
   role: Role
 
-  constructor() {
-    this.id = randomUUID()
-    this.created_at = new Date()
+  constructor(name: string, email: string, password: string, isAdmin: boolean, role: Role) {
+    Object.assign(this, { name, email, password, isAdmin, role, id: randomUUID(), created_at: new Date() })
   }
 }

@@ -1,21 +1,19 @@
+import { Role } from '@/roles/entities/Role'
 import { dataSource } from '@/shared/typeorm'
 import { Repository } from 'typeorm'
+import { CreateUserDTO } from '../dtos/CreateUserDTO'
 import { User } from '../entities/User'
-import { CreateUserDTO, IUsersRepository, UsersPaginateParams, UsersPaginateProperties } from './IUsersRepository'
+import { IUsersRepository, UsersPaginateParams, UsersPaginateProperties } from './IUsersRepository'
 
 export class UsersRepository implements IUsersRepository {
-  constructor(private readonly repository: Repository<User>) {
+  private readonly repository: Repository<User>
+
+  constructor() {
     this.repository = dataSource.getRepository(User)
   }
 
-  async create({ name, email, password, isAdmin, role }: CreateUserDTO): Promise<User> {
-    const user = this.repository.create({
-      name,
-      email,
-      password,
-      isAdmin,
-      role,
-    })
+  async create({ name, email, password, isAdmin, role }: Omit<CreateUserDTO, 'roleId'> & { role: Role }): Promise<User> {
+    const user = this.repository.create(new User(name, email, password, isAdmin, role))
     return this.repository.save(user)
   }
 

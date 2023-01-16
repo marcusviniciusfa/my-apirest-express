@@ -1,13 +1,6 @@
 import { Role } from '@/roles/entities/Role'
+import { CreateUserDTO } from '../dtos/CreateUserDTO'
 import { User } from '../entities/User'
-
-export interface CreateUserDTO {
-  name: string
-  email: string
-  password: string
-  isAdmin: boolean
-  role: Role
-}
 
 export interface UsersPaginateParams {
   page: number
@@ -23,7 +16,7 @@ export interface UsersPaginateProperties {
 }
 
 export interface IUsersRepository {
-  create({ name, email, password, isAdmin, role }: CreateUserDTO): Promise<User>
+  create({ name, email, password, isAdmin, role }: Omit<CreateUserDTO, 'roleId'> & { role: Role }): Promise<User>
   update(user: User): Promise<User>
   delete(user: User): Promise<void>
   findByName(name: string): Promise<User | null>

@@ -1,8 +1,5 @@
 import { Role } from '@/roles/entities/Role'
-
-export interface CreateRoleDTO {
-  name: string
-}
+import { CreateRoleDTO } from '../dtos/CreateRoleDTO'
 
 export interface RolesPaginateParams {
   page: number

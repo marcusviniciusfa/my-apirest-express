@@ -38,10 +38,19 @@ npm run typeorm migration:create src/shared/typeorm/migrations/CreateRolesTable
 npm run typeorm -- -d src/shared/typeorm/index.ts migration:run
 ~~~
 
-### Regex pattern
+### Padrões Regex
 
 - [UUID v4](https://ihateregex.io/expr/uuid/)
 
-### Swagger example
+### Exemplo para documentações Swagger
 
 - [Swagger Editor](https://editor.swagger.io)
+
+### Módulo helper de Criptografia
+
+- Especificação AES (Advanced Encryption Standard)
+  - Pode utilizar uma ou duas chaves de encriptação
+- Módulo ECB (Electronic Code Book), para utilizar apenas uma chave
+- `openssl list-cipher-algorithms` - esse comando pode ser executado em sistemas baseados em Unix para verificar os tipos de algorítimos de criptografia disponíveis. `openssl list-cipher-algorithms | grep "AES-256-ECB"`
+- [Ferramenta para testar Criptografia](https://www.devglan.com/online-tools/aes-encryption-decryption)
+- [Referência](https://youtu.be/NiMlyJhlbeg)

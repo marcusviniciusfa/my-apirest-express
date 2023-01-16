@@ -1,11 +1,8 @@
 import { Role } from '@/roles/entities/Role'
-import { IRolesRepository } from '@/roles/repositories/IRolesRepository'
 import { BadRequestError } from '@/shared/errors/BadRequestError'
 import { inject, injectable } from 'tsyringe'
-
-interface CreateRoleDTO {
-  name: string
-}
+import { CreateRoleDTO } from '../dtos/CreateRoleDTO'
+import { IRolesRepository } from '../repositories/IRolesRepository'
 
 @injectable()
 export class CreateRoleUseCase {

@@ -4,11 +4,11 @@ import { validator } from '@/shared/validator'
 import { Router } from 'express'
 import { container } from 'tsyringe'
 
-const createRolesController: IRolesController = container.resolve('CreateRoleController')
-const deleteRolesController: IRolesController = container.resolve('DeleteRoleController')
+const createRoleController: IRolesController = container.resolve('CreateRoleController')
+const deleteRoleController: IRolesController = container.resolve('DeleteRoleController')
 const listRolesController: IRolesController = container.resolve('ListRolesController')
-const showRolesController: IRolesController = container.resolve('ShowRoleController')
-const updateRolesController: IRolesController = container.resolve('UpdateRoleController')
+const showRoleController: IRolesController = container.resolve('ShowRoleController')
+const updateRoleController: IRolesController = container.resolve('UpdateRoleController')
 
 const rolesRouter = Router()
 
@@ -23,7 +23,7 @@ rolesRouter.post('/', (req, res) => {
     },
     req.body,
   )
-  return createRolesController.handler(req, res)
+  return createRoleController.handler(req, res)
 })
 
 rolesRouter.get('/', (req, res) => {
@@ -50,7 +50,7 @@ rolesRouter.get('/:id', (req, res) => {
     },
     req.params,
   )
-  return showRolesController.handler(req, res)
+  return showRoleController.handler(req, res)
 })
 
 rolesRouter.put('/:id', (req, res) => {
@@ -68,7 +68,7 @@ rolesRouter.put('/:id', (req, res) => {
       ...req.body,
     },
   )
-  return updateRolesController.handler(req, res)
+  return updateRoleController.handler(req, res)
 })
 
 rolesRouter.delete('/:id', (req, res) => {
@@ -81,7 +81,7 @@ rolesRouter.delete('/:id', (req, res) => {
     },
     req.params,
   )
-  return deleteRolesController.handler(req, res)
+  return deleteRoleController.handler(req, res)
 })
 
 export { rolesRouter }

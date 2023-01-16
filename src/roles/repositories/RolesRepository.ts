@@ -1,10 +1,13 @@
 import { Role } from '@/roles/entities/Role'
 import { dataSource } from '@/shared/typeorm'
 import { Repository } from 'typeorm'
-import { CreateRoleDTO, IRolesRepository, RolesPaginateParams, RolesPaginateProperties } from './IRolesRepository'
+import { CreateRoleDTO } from '../dtos/CreateRoleDTO'
+import { IRolesRepository, RolesPaginateParams, RolesPaginateProperties } from './IRolesRepository'
 
 export class RolesRepository implements IRolesRepository {
-  constructor(private readonly repository: Repository<Role>) {
+  private readonly repository: Repository<Role>
+
+  constructor() {
     this.repository = dataSource.getRepository(Role)
   }
 
