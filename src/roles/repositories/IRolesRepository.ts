@@ -1,4 +1,4 @@
-import { Role } from '@/roles/entities/Role'
+import { Role } from '@/roles/database/entities/Role'
 import { CreateRoleDTO } from '../dtos/CreateRoleDTO'
 
 export interface RolesPaginateParams {

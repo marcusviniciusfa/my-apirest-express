@@ -1,4 +1,4 @@
-import { Role } from '@/roles/entities/Role'
+import { Role } from '@/roles/database/entities/Role'
 import { IRolesRepository } from '@/roles/repositories/IRolesRepository'
 import { NotFoundError } from '@/shared/errors/NotFoundError'
 import { inject, injectable } from 'tsyringe'

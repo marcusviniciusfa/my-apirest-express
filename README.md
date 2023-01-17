@@ -23,6 +23,7 @@ No VSCode use a tecla `F5` ou clique em "Executar e Depurar" na aba lateral esqu
 
 - [x] Validação dos dados recebidos pela API usando o [Ajv JSON schema validator](https://ajv.js.org/)
 - [x] Middleware de tratamento de erros personalizado
+- [x] Criação de seeds para popular uma tabela do banco de dados utilizando o módulo [typeorm-extension](https://typeorm-extension.tada5hi.net/guide/seeding.html), recomendado pelo [TypeORM](https://typeorm.io/#extensions)
 - [ ] Adicionar testes unitários e end-to-end na aplicação
 
 ## Anotações
@@ -30,13 +31,17 @@ No VSCode use a tecla `F5` ou clique em "Executar e Depurar" na aba lateral esqu
 ### TypeORM CLI
 
 ~~~bash
-# samples
-
-# create an migration
+# cria uma migration
 npm run typeorm migration:create src/shared/typeorm/migrations/CreateRolesTable
 
-# execute an migration
-npm run typeorm -- -d src/shared/typeorm/index.ts migration:run
+# executa uma migration
+npm run typeorm migration:run
+
+# mostra todas as migrations e se elas foram executadas ou não
+npm run typeorm migration:show
+
+# exclui completamente os dados do banco de dados
+npm run typeorm schema:drop
 ~~~
 
 ### Padrões Regex

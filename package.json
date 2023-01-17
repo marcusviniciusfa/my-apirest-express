@@ -6,7 +6,8 @@
   "scripts": {
     "build": "rimraf dist && npx tsc",
     "dev": "ts-node-dev -r dotenv/config -r tsconfig-paths/register --inspect --transpile-only --ignore-watch node_modules src/shared/http/server.ts",
-    "typeorm": "ts-node-dev -r tsconfig-paths/register ./node_modules/typeorm/cli.js",
+    "typeorm": "ts-node-dev -r tsconfig-paths/register ./node_modules/typeorm/cli.js -- -d src/shared/typeorm/index.ts",
+    "seed": "ts-node-dev -r tsconfig-paths/register ./node_modules/typeorm-extension/dist/cli/index.js seed -- -d src/shared/typeorm/index.ts",
     "lint": "eslint --fix .",
     "test": "echo \"Error: no test specified\"",
     "prepare": "husky install",
@@ -48,7 +49,8 @@
     "sqlite3": "^5.1.2",
     "swagger-ui-express": "^4.6.0",
     "tsyringe": "^4.7.0",
-    "typeorm": "^0.3.10"
+    "typeorm": "^0.3.10",
+    "typeorm-extension": "^2.4.1"
   },
   "config": {
     "commitizen": {

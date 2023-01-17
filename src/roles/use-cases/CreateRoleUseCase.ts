@@ -1,4 +1,4 @@
-import { Role } from '@/roles/entities/Role'
+import { Role } from '@/roles/database/entities/Role'
 import { BadRequestError } from '@/shared/errors/BadRequestError'
 import { inject, injectable } from 'tsyringe'
 import { CreateRoleDTO } from '../dtos/CreateRoleDTO'

@@ -1,4 +1,4 @@
-import { Role } from '@/roles/entities/Role'
+import { Role } from '@/roles/database/entities/Role'
 import { randomUUID } from 'node:crypto'
 import { Column, Entity, ManyToOne, PrimaryColumn } from 'typeorm'
 

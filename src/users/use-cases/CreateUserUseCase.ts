@@ -1,11 +1,11 @@
-import { Role } from '@/roles/entities/Role'
+import { Role } from '@/roles/database/entities/Role'
 import { IRolesRepository } from '@/roles/repositories/IRolesRepository'
 import { BadRequestError } from '@/shared/errors/BadRequestError'
 import { NotFoundError } from '@/shared/errors/NotFoundError'
 import { cryptoHelper } from '@/shared/helpers/CryptoHelper'
 import { inject, injectable } from 'tsyringe'
+import { User } from '../database/entities/User'
 import { CreateUserDTO } from '../dtos/CreateUserDTO'
-import { User } from '../entities/User'
 import { IUsersRepository } from '../repositories/IUsersRepository'
 
 @injectable()

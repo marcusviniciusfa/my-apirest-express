@@ -1,8 +1,8 @@
-import { Role } from '@/roles/entities/Role'
+import { Role } from '@/roles/database/entities/Role'
 import { dataSource } from '@/shared/typeorm'
 import { Repository } from 'typeorm'
+import { User } from '../database/entities/User'
 import { CreateUserDTO } from '../dtos/CreateUserDTO'
-import { User } from '../entities/User'
 import { IUsersRepository, UsersPaginateParams, UsersPaginateProperties } from './IUsersRepository'
 
 export class UsersRepository implements IUsersRepository {
