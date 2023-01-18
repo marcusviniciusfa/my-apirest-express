@@ -38,7 +38,7 @@ export class UsersRepository implements IUsersRepository {
   }
 
   async findAll({ page, skip, take }: UsersPaginateParams): Promise<UsersPaginateProperties> {
-    const [users, count] = await this.repository.createQueryBuilder('UsersRole').leftJoinAndSelect('UsersRoles.role', 'role').skip(skip).take(take).getManyAndCount()
+    const [users, count] = await this.repository.createQueryBuilder('UsersRoles').leftJoinAndSelect('UsersRoles.role', 'role').skip(skip).take(take).getManyAndCount()
     const result = {
       per_page: take,
       total: count,

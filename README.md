@@ -44,6 +44,13 @@ npm run typeorm migration:show
 npm run typeorm schema:drop
 ~~~
 
+### typeorm-extension CLI
+
+~~~bash
+# popula a tabela de Roles com dados iniciais
+npm run seeding
+~~~
+
 ### Padrões Regex
 
 - [UUID v4](https://ihateregex.io/expr/uuid/)

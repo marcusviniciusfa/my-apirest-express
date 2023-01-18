@@ -1,10 +1,11 @@
-import { EMAIL_PATTERN, PASSWORD_PATTERN, UUID_PATTERN } from '@/shared/constants'
+import { EMAIL_PATTERN, PASSWORD_PATTERN, POSITIVE_NUMBER_PATTERN, UUID_PATTERN } from '@/shared/constants'
 import { validator } from '@/shared/validator'
 import { IUsersController } from '@/users/controllers/IUsersController'
 import { Router } from 'express'
 import { container } from 'tsyringe'
 
 const createUserController: IUsersController = container.resolve('CreateUserController')
+const listUsersController: IUsersController = container.resolve('ListUsersController')
 
 const usersRouter = Router()
 
@@ -24,6 +25,20 @@ usersRouter.post('/', (req, res) => {
     req.body,
   )
   return createUserController.handler(req, res)
+})
+
+usersRouter.get('/', (req, res) => {
+  validator(
+    {
+      type: 'object',
+      properties: {
+        page: { type: 'string', pattern: POSITIVE_NUMBER_PATTERN },
+        limit: { type: 'string', pattern: POSITIVE_NUMBER_PATTERN },
+      },
+    },
+    req.query,
+  )
+  return listUsersController.handler(req, res)
 })
 
 export { usersRouter }
