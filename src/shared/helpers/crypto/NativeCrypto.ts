@@ -1,4 +1,5 @@
 import { createCipheriv, createDecipheriv, Encoding } from 'node:crypto'
+import { ICrypto } from './ICrypto'
 
 /**
  * aes-192-ecb
@@ -6,7 +7,7 @@ import { createCipheriv, createDecipheriv, Encoding } from 'node:crypto'
  * 192 = bits da chave (24 caracteres * 8 bits)
  * ecb = Electronic Code Book
  */
-export class CryptoHelper {
+export class NativeCrypto implements ICrypto {
   private algorithm: string
   private inputEncoding: Encoding
   private outputEncoding: Encoding
@@ -22,11 +23,15 @@ export class CryptoHelper {
     return cipher.update(data, this.inputEncoding, this.outputEncoding).concat(cipher.final(this.outputEncoding))
   }
 
-  decrypt(data: string, key: string) {
+  decrypt(data: string, key: string): string {
     const decipher = createDecipheriv(this.algorithm, key, null, null)
     return decipher.update(data, this.outputEncoding, this.inputEncoding).concat(decipher.final(this.inputEncoding))
   }
+
+  compare(data: string, encryptData: string, key: string): boolean {
+    return data.includes(this.decrypt(encryptData, key))
+  }
 }
 
-const cryptoHelper = new CryptoHelper()
-export { cryptoHelper }
+const nativeCrypto = new NativeCrypto()
+export { nativeCrypto }

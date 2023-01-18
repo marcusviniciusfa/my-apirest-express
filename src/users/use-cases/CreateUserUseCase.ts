@@ -2,7 +2,7 @@ import { Role } from '@/roles/database/entities/Role'
 import { IRolesRepository } from '@/roles/repositories/IRolesRepository'
 import { BadRequestError } from '@/shared/errors/BadRequestError'
 import { NotFoundError } from '@/shared/errors/NotFoundError'
-import { cryptoHelper } from '@/shared/helpers/CryptoHelper'
+import { nativeCrypto } from '@/shared/helpers/crypto/NativeCrypto'
 import { inject, injectable } from 'tsyringe'
 import { User } from '../database/entities/User'
 import { CreateUserDTO } from '../dtos/CreateUserDTO'
@@ -21,7 +21,7 @@ export class CreateUserUseCase {
     if (!role) {
       throw new NotFoundError('role not found 🔎')
     }
-    const encryptedPassword = cryptoHelper.encrypt(password, process.env.ENCRYPTION_KEY)
+    const encryptedPassword = nativeCrypto.encrypt(password, process.env.ENCRYPTION_KEY)
     const user = this.usersRepository.create({ name, email, isAdmin, password: encryptedPassword, role })
     return user
   }
