@@ -5,19 +5,22 @@ import { inject, injectable } from 'tsyringe'
 import { User } from '../database/entities/User'
 import { IUsersRepository } from '../repositories/IUsersRepository'
 
-interface LoginDTO {
+export interface LoginDTO {
   email: string
   password: string
 }
 
-type UserToken = User & { token: string }
+export interface UserToken {
+  user: User
+  token: string
+}
 
 @injectable()
 export class CreateLoginUseCase {
-  constructor(@inject('UserRepository') private userRepository: IUsersRepository) {}
+  constructor(@inject('UsersRepository') private usersRepository: IUsersRepository) {}
 
   async execute({ email, password }: LoginDTO): Promise<UserToken> {
-    const user = await this.userRepository.findByEmail(email)
+    const user = await this.usersRepository.findByEmail(email)
     if (!user) {
       // não explicativo para confundir usuários maliciosos
       throw new Unauthorized('incorrect email/password combination 🔒')
@@ -26,9 +29,7 @@ export class CreateLoginUseCase {
     if (!correctPassword) {
       throw new Unauthorized('incorrect email/password combination 🔒')
     }
-    return {
-      ...user,
-      token: jwtAuth.getToken(email, { subject: user.id }),
-    }
+    const token = jwtAuth.getToken({ email })
+    return { user, token }
   }
 }

@@ -29,7 +29,7 @@ export class NativeCrypto implements ICrypto {
   }
 
   compare(data: string, encryptData: string, key: string): boolean {
-    return data.includes(this.decrypt(encryptData, key))
+    return data === this.decrypt(encryptData, key)
   }
 }
 

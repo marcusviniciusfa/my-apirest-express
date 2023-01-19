@@ -8,11 +8,7 @@ export class RoleSeeder implements Seeder {
   async run(dataSource: DataSource, _factoryManager: SeederFactoryManager) {
     const repository = dataSource.getRepository(Role)
     await repository.insert([
-      new Role('manager'),
-      new Role('agilist'),
-      new Role('dev front-end'),
-      new Role('dev back-end'),
-      new Role('tester qa')
+      new Role('sample'),
     ])
   }
 }

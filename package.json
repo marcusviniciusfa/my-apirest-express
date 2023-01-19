@@ -11,8 +11,7 @@
     "lint": "eslint --fix .",
     "test": "echo \"Error: no test specified\"",
     "prepare": "husky install",
-    "commit": "git-cz",
-    "encrytion-keygen": "echo $1 | md5 -p | cut -c -24"
+    "commit": "git-cz"
   },
   "keywords": [],
   "author": "",

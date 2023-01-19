@@ -12,19 +12,19 @@ No VSCode use a tecla `F5` ou clique em "Executar e Depurar" na aba lateral esqu
 
 ## Tópicos
 
-- [x] Entender o que é, e como funciona uma API Restful
-- [x] Construir API Restful Javascript NodeJS com ExpressJS e Typescript
-- [x] Implementar o [TypeORM](https://typeorm.io/) em projetos NodeJS com bancos de dados relacionais
-- [x] Documentar API Restful com o Swagger ([Open API](https://github.com/OAI/OpenAPI-Specification/blob/main/versions/3.0.3.md))
+- [x] API Restful NodeJS com ExpressJS e TypeScript
+- [x] [TypeORM](https://typeorm.io/) para bancos de dados relacional
+- [x] Documentação da API Restful com o Swagger ([Open API](https://github.com/OAI/OpenAPI-Specification/blob/main/versions/3.0.3.md))
 - [x] IoC e injeção de dependências com a lib [tsyringe](https://github.com/Microsoft/tsyringe#readme) da Microsoft. [Artigo](https://dev.to/logrocket/top-5-typescript-dependency-injection-containers-53e2) sobre o uso de containers de injeção de dependências
-- [ ] Implementar autenticação com token de acesso e refresh token (JWT)
+- [ ] Autenticação com token de acesso Json Web Token (JWT) e Refresh Token
+- [ ] Upload de imagens com [Multer](https://github.com/expressjs/multer/blob/master/doc/README-pt-br.md)
 
 ### Extra
 
 - [x] Validação dos dados recebidos pela API usando o [Ajv JSON schema validator](https://ajv.js.org/)
 - [x] Middleware de tratamento de erros personalizado
-- [x] Criação de seeds para popular uma tabela do banco de dados utilizando o módulo [typeorm-extension](https://typeorm-extension.tada5hi.net/guide/seeding.html), recomendado pelo [TypeORM](https://typeorm.io/#extensions)
-- [ ] Adicionar testes unitários e end-to-end na aplicação
+- [x] Seeds para popular uma tabela do banco de dados utilizando o módulo [typeorm-extension](https://typeorm-extension.tada5hi.net/guide/seeding.html), recomendado pelo [TypeORM](https://typeorm.io/#extensions)
+- [ ] Testes unitários e end-to-end na aplicação
 
 ## Anotações
 

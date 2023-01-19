@@ -6,6 +6,7 @@ import { container } from 'tsyringe'
 
 const createUserController: IUsersController = container.resolve('CreateUserController')
 const listUsersController: IUsersController = container.resolve('ListUsersController')
+const createLoginController: IUsersController = container.resolve('CreateLoginController')
 
 const usersRouter = Router()
 
@@ -39,6 +40,20 @@ usersRouter.get('/', (req, res) => {
     req.query,
   )
   return listUsersController.handler(req, res)
+})
+
+usersRouter.post('/login', (req, res) => {
+  validator(
+    {
+      type: 'object',
+      properties: {
+        email: { type: 'string', pattern: EMAIL_PATTERN },
+        password: { type: 'string', pattern: PASSWORD_PATTERN },
+      },
+    },
+    req.body,
+  )
+  return createLoginController.handler(req, res)
 })
 
 export { usersRouter }

@@ -10,11 +10,11 @@ export class JwtAuth implements IAuth {
     this.expiresIn = process.env.AUTH_EXPIRES_IN
   }
 
-  getToken(payload: string, options?: jwt.SignOptions): string {
+  getToken(payload: object, options?: jwt.SignOptions): string {
     return jwt.sign(payload, this.key, { expiresIn: this.expiresIn, ...options })
   }
 
-  decodeToken(token: string, options?: jwt.DecodeOptions): string | jwt.JwtPayload {
+  decodeToken(token: string, options?: jwt.DecodeOptions): string | jwt.JwtPayload | null {
     return jwt.decode(token, options)
   }
 }
