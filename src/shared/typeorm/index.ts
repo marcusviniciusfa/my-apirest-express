@@ -1,6 +1,6 @@
 import { Role } from '@/roles/database/entities/Role'
-import { RoleSeeder } from '@/roles/database/seeding/RoleSeeder'
 import { User } from '@/users/database/entities/User'
+import { UserSeeder } from '@/users/database/seeding/UserSeeder'
 import { DataSource, DataSourceOptions } from 'typeorm'
 import { SeederOptions } from 'typeorm-extension'
 import { CreateRolesTable1668986011952 } from './migrations/1668986011952-CreateRolesTable'
@@ -12,7 +12,7 @@ const options: DataSourceOptions & SeederOptions = {
   database: './db.sqlite',
   entities: [Role, User],
   migrations: [CreateRolesTable1668986011952, CreateUsersTable1673312143744, AddRoleIdToUsersTable1673313376233],
-  seeds: [RoleSeeder],
+  seeds: [UserSeeder],
 }
 
 const dataSource = new DataSource(options)
