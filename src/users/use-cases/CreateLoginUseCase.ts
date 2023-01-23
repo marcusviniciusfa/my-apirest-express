@@ -29,7 +29,7 @@ export class CreateLoginUseCase {
     if (!correctPassword) {
       throw new Unauthorized('incorrect email/password combination 🔒')
     }
-    const token = jwtAuth.getToken({ email })
+    const token = jwtAuth.getToken({ email }, { subject: user.id })
     return { user, token }
   }
 }

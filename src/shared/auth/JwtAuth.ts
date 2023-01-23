@@ -1,5 +1,5 @@
 import jwt from 'jsonwebtoken'
-import { IAuth } from './IAuth'
+import { AuthPayload, IAuth } from './IAuth'
 
 export class JwtAuth implements IAuth {
   private key: string
@@ -14,8 +14,9 @@ export class JwtAuth implements IAuth {
     return jwt.sign(payload, this.key, { expiresIn: this.expiresIn, ...options })
   }
 
-  decodeToken(token: string, options?: jwt.DecodeOptions): string | jwt.JwtPayload | null {
-    return jwt.decode(token, options)
+  decodeToken(token: string, options?: jwt.DecodeOptions): AuthPayload | null {
+    const { sub: subject } = jwt.decode(token, options)
+    return { subject } as AuthPayload
   }
 }
 

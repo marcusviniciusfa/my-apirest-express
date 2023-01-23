@@ -3,8 +3,8 @@
 ## Executar
 
 1. `npm install` instale as dependências do projeto
-2. `mv sample.env .env` preencha as variável em branco
-3. `npm run dev` inicie o servidor Express
+2. `mv sample.env .env` preencha as variáveis de ambiente
+3. `npm run dev` inicie o servidor
 
 ## Debug
 
