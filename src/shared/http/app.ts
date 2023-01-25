@@ -5,6 +5,7 @@ import swaggerFile from '@/swagger.json'
 import cors from 'cors'
 import express, { Application } from 'express'
 import swaggerUi from 'swagger-ui-express'
+import { uploadConfig } from '../config/upload'
 import { authentication } from './middlewares/authentication'
 import { errorHandler } from './middlewares/errorHandler'
 import { logStackTraceError } from './middlewares/logStackTraceError'
@@ -16,6 +17,7 @@ app.use(cors())
 app.use(express.json())
 app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerFile))
 app.use(authentication)
+app.use('/files', express.static(uploadConfig.dest))
 app.use(routes)
 app.use(logStackTraceError)
 app.use(errorHandler)

@@ -26,6 +26,7 @@ No VSCode use a tecla `F5` ou clique em "Executar e Depurar" na aba lateral esqu
 - [x] Seeds para popular uma tabela do banco de dados utilizando o módulo [typeorm-extension](https://typeorm-extension.tada5hi.net/guide/seeding.html), recomendado pelo [TypeORM](https://typeorm.io/#extensions)
 - [ ] Testes unitários e end-to-end na aplicação
 - [ ] Salvar avatar no Simple Storage Service (S3) da AWS
+- [ ] i18n para tradução de mensagens de erro
 
 ## Anotações
 
@@ -71,7 +72,7 @@ npm run seeding
 
 ### Gerador de keys
 
-No [REPL](https://nodejs.org/api/repl.html#repl), ou console do Node, é possível utilizar o módulo `crypto` para gerar chaves aleatórios. Exemplo de uso: popular os campos que precisam de chaves no arquivo `.env`
+No [REPL](https://nodejs.org/api/repl.html#repl), ou console do Node, é possível utilizar o módulo `crypto` para gerar chaves aleatórias. Exemplo de uso: popular os campos que precisam de chaves no arquivo `.env`
 
 - `node` entre no console do Node
 - `crypto.randomBytes(16).toString('hex')` crie uma chave aleatória mudando a quantidade de bytes de tamanho. Uma observação, o tamanho da chave sempre será o dobro do valor passado no parâmetro de `randomBytes`, isso acontece por da conversão que é feita em seguida pelo `toString`, para a base 16. Para resolver esse problema basta construir o gerador nesse formato `crypto.randomBytes(Math.ceil(16)).toString('hex').slice(0, 16)`

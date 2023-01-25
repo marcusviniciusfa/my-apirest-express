@@ -3,3 +3,4 @@
 .env
 *.sqlite
 /temp
+db.sqlite
