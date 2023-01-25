@@ -10,7 +10,7 @@ export class UserViewModel {
       isAdmin: user.isAdmin,
       role: user.role,
       created_at: user.created_at,
-      avatar_url: `${process.env.API_BASE_URL}/files/${user.avatar}`,
+      avatar_url: user.avatar ? `${process.env.API_BASE_URL}/files/${user.avatar}` : null,
     }
   }
 }

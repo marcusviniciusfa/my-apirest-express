@@ -1,16 +1,34 @@
 # My API Express
 
-## Executar
+## Executando
 
 1. `npm install` instale as dependências do projeto
+
 2. `mv sample.env .env` preencha as variáveis de ambiente
+
 3. `npm run dev` inicie o servidor
 
-## Debug
+4. `npm run typeorm migration:run` execute as migrações do banco de dados
 
-No VSCode use a tecla `F5` ou clique em "Executar e Depurar" na aba lateral esquerda. Em seguida, clique na seta verde ("Iniciar a Depuração")
+5. `npm run seeding` crie o [usuário admin](./src/users/database/seeding/UserSeeder.ts)
 
-## Tópicos
+6. faça o login com o usuário admin à partir de uma requisição na rota `/users/login`, enviando o email e o password do usuário admin. Você vai receber o token de acesso
+
+~~~json
+{
+	"email": "user.admin@email.com",
+	"password": "12345678"
+}
+~~~
+
+7. agora, antes de fazer as demais requisições basta adicionar ao Header o campo `Authorization` com o valor `Bearer + expaço + token`
+
+## Documentação da API
+
+- `npm run dev` inicie o servidor
+- http://localhost:3000/docs acesse a documentação no browser
+
+## Tópicos cobertos
 
 - [x] API Restful NodeJS com ExpressJS e TypeScript
 - [x] [TypeORM](https://typeorm.io/) para bancos de dados relacional
@@ -36,7 +54,7 @@ No VSCode use a tecla `F5` ou clique em "Executar e Depurar" na aba lateral esqu
 # cria uma migration
 npm run typeorm migration:create src/shared/typeorm/migrations/CreateRolesTable
 
-# executa uma migration
+# executa as migrations
 npm run typeorm migration:run
 
 # mostra todas as migrations e se elas foram executadas ou não
@@ -56,6 +74,7 @@ npm run seeding
 ### Padrões Regex
 
 - [UUID v4](https://ihateregex.io/expr/uuid/)
+- [E-Mail](https://ihateregex.io/expr/email/)
 
 ### Exemplo para documentações Swagger
 
@@ -75,4 +94,4 @@ npm run seeding
 No [REPL](https://nodejs.org/api/repl.html#repl), ou console do Node, é possível utilizar o módulo `crypto` para gerar chaves aleatórias. Exemplo de uso: popular os campos que precisam de chaves no arquivo `.env`
 
 - `node` entre no console do Node
-- `crypto.randomBytes(16).toString('hex')` crie uma chave aleatória mudando a quantidade de bytes de tamanho. Uma observação, o tamanho da chave sempre será o dobro do valor passado no parâmetro de `randomBytes`, isso acontece por da conversão que é feita em seguida pelo `toString`, para a base 16. Para resolver esse problema basta construir o gerador nesse formato `crypto.randomBytes(Math.ceil(16)).toString('hex').slice(0, 16)`
+- `crypto.randomBytes(16).toString('hex')` crie uma chave aleatória mudando a quantidade de bytes de tamanho. Uma observação: o tamanho da chave sempre será o dobro do valor passado no parâmetro de `randomBytes`, isso acontece por causa da conversão, para a base 16, que é feita em seguida pelo `toString`. Para resolver esse problema basta construir o gerador nesse formato `crypto.randomBytes(Math.ceil(16)).toString('hex').slice(0, 16)`

@@ -17,7 +17,7 @@ rolesRouter.post('/', (req, res) => {
     {
       type: 'object',
       properties: {
-        name: { type: 'string', pattern: PATTERN.ROLE_NAME },
+        name: { type: 'string' },
       },
       required: ['name'],
     },
@@ -59,7 +59,7 @@ rolesRouter.put('/:id', (req, res) => {
       type: 'object',
       properties: {
         id: { type: 'string', pattern: PATTERN.UUID },
-        name: { type: 'string', pattern: PATTERN.ROLE_NAME },
+        name: { type: 'string' },
       },
       required: ['name'],
     },
