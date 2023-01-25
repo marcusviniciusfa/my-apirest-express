@@ -1,5 +1,5 @@
 import { IRolesController } from '@/roles/controllers/IRolesController'
-import { POSITIVE_NUMBER_PATTERN, ROLE_NAME_PATTERN, UUID_PATTERN } from '@/shared/constants'
+import { PATTERN } from '@/shared/constants'
 import { validator } from '@/shared/validator'
 import { Router } from 'express'
 import { container } from 'tsyringe'
@@ -17,7 +17,7 @@ rolesRouter.post('/', (req, res) => {
     {
       type: 'object',
       properties: {
-        name: { type: 'string', pattern: ROLE_NAME_PATTERN },
+        name: { type: 'string', pattern: PATTERN.ROLE_NAME },
       },
       required: ['name'],
     },
@@ -31,8 +31,8 @@ rolesRouter.get('/', (req, res) => {
     {
       type: 'object',
       properties: {
-        page: { type: 'string', pattern: POSITIVE_NUMBER_PATTERN },
-        limit: { type: 'string', pattern: POSITIVE_NUMBER_PATTERN },
+        page: { type: 'string', pattern: PATTERN.POSITIVE_NUMBER },
+        limit: { type: 'string', pattern: PATTERN.POSITIVE_NUMBER },
       },
     },
     req.query,
@@ -45,7 +45,7 @@ rolesRouter.get('/:id', (req, res) => {
     {
       type: 'object',
       properties: {
-        id: { type: 'string', pattern: UUID_PATTERN },
+        id: { type: 'string', pattern: PATTERN.UUID },
       },
     },
     req.params,
@@ -58,8 +58,8 @@ rolesRouter.put('/:id', (req, res) => {
     {
       type: 'object',
       properties: {
-        id: { type: 'string', pattern: UUID_PATTERN },
-        name: { type: 'string', pattern: ROLE_NAME_PATTERN },
+        id: { type: 'string', pattern: PATTERN.UUID },
+        name: { type: 'string', pattern: PATTERN.ROLE_NAME },
       },
       required: ['name'],
     },
@@ -76,7 +76,7 @@ rolesRouter.delete('/:id', (req, res) => {
     {
       type: 'object',
       properties: {
-        id: { type: 'string', pattern: UUID_PATTERN },
+        id: { type: 'string', pattern: PATTERN.UUID },
       },
     },
     req.params,

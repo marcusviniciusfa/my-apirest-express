@@ -3,12 +3,8 @@ import { Unauthorized } from '@/shared/errors/Unauthorized'
 import { nativeCrypto } from '@/shared/helpers/crypto/NativeCrypto'
 import { inject, injectable } from 'tsyringe'
 import { User } from '../database/entities/User'
+import { LoginDTO } from '../dtos/LoginDTO'
 import { IUsersRepository } from '../repositories/IUsersRepository'
-
-export interface LoginDTO {
-  email: string
-  password: string
-}
 
 export interface UserToken {
   user: User
