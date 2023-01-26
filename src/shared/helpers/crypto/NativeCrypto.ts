@@ -9,27 +9,31 @@ import { ICrypto } from './ICrypto'
  */
 export class NativeCrypto implements ICrypto {
   private algorithm: string
+  private key: string
   private inputEncoding: Encoding
   private outputEncoding: Encoding
 
   constructor() {
-    this.algorithm = 'aes-192-ecb'
-    this.inputEncoding = 'utf-8'
-    this.outputEncoding = 'base64'
+    Object.assign(this, {
+      algorithm: 'aes-192-ecb',
+      key: process.env.ENCRYPTION_KEY,
+      inputEncoding: 'utf-8',
+      outputEncoding: 'base64',
+    })
   }
 
-  encrypt(data: string, key: string) {
-    const cipher = createCipheriv(this.algorithm, key, null, null)
+  encrypt(data: string) {
+    const cipher = createCipheriv(this.algorithm, this.key, null, null)
     return cipher.update(data, this.inputEncoding, this.outputEncoding).concat(cipher.final(this.outputEncoding))
   }
 
-  decrypt(data: string, key: string): string {
-    const decipher = createDecipheriv(this.algorithm, key, null, null)
+  decrypt(data: string): string {
+    const decipher = createDecipheriv(this.algorithm, this.key, null, null)
     return decipher.update(data, this.outputEncoding, this.inputEncoding).concat(decipher.final(this.inputEncoding))
   }
 
-  compare(data: string, encryptData: string, key: string): boolean {
-    return data === this.decrypt(encryptData, key)
+  compare(data: string, encryptData: string): boolean {
+    return data === this.decrypt(encryptData)
   }
 }
 

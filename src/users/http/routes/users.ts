@@ -11,6 +11,7 @@ const listUsersController: IUsersController = container.resolve('ListUsersContro
 const createLoginController: IUsersController = container.resolve('CreateLoginController')
 const upInsertAvatarController: IUsersController = container.resolve('UpInsertAvatarController')
 const showProfileController: IUsersController = container.resolve('ShowProfileController')
+const updateUserController: IUsersController = container.resolve('UpdateUserController')
 
 const usersRouter = Router()
 
@@ -84,6 +85,24 @@ usersRouter.get('/profile/:id', (req, res) => {
     req.params,
   )
   return showProfileController.handler(req, res)
+})
+
+usersRouter.put('/profile/:id', (req, res) => {
+  validator(
+    {
+      type: 'object',
+      properties: {
+        id: { type: 'string', pattern: PATTERN.UUID },
+        name: { type: 'string' },
+        email: { type: 'string', pattern: PATTERN.EMAIL },
+        old_password: { type: 'string', pattern: PATTERN.PASSWORD },
+        new_password: { type: 'string', pattern: PATTERN.PASSWORD },
+      },
+      required: ['id', 'name', 'email', 'old_password'],
+    },
+    { ...req.body, ...req.params },
+  )
+  return updateUserController.handler(req, res)
 })
 
 export { usersRouter }

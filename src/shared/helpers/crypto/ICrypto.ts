@@ -1,5 +1,5 @@
 export interface ICrypto {
-  encrypt(data: string, key: string): string
-  decrypt(data: string, key: string): string
-  compare(data: string, encryptData: string, key: string): boolean
+  encrypt(data: string): string
+  decrypt(data: string): string
+  compare(data: string, encryptData: string): boolean
 }
