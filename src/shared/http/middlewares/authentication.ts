@@ -3,9 +3,9 @@ import { Unauthorized } from '@/shared/errors/Unauthorized'
 import { NextFunction, Request, Response } from 'express'
 
 export async function authentication(req: Request, _res: Response, next: NextFunction) {
-  const allowedRoutes = ['/login', '/files']
-  const pattern = new RegExp(allowedRoutes.join('|'), 'g')
-  if (!pattern.test(req.path)) {
+  const allowedRoutesByDefault = ['/docs', '/login', '/files']
+  const allowedRoutesPattern = new RegExp(allowedRoutesByDefault.join('|'), 'g')
+  if (!allowedRoutesPattern.test(req.path)) {
     const { authorization } = req.headers
     if (!authorization) {
       throw new Unauthorized('failed to verify access token 🔒')
