@@ -43,6 +43,7 @@
 - [x] Middleware de tratamento de erros personalizado
 - [x] Seeds para popular uma tabela do banco de dados utilizando o módulo [typeorm-extension](https://typeorm-extension.tada5hi.net/guide/seeding.html), recomendado pelo [TypeORM](https://typeorm.io/#extensions)
 - [ ] Testes unitários e end-to-end na aplicação
+- [ ] BDD com Cucumber
 - [ ] Salvar avatar no Simple Storage Service (S3) da AWS
 - [ ] i18n para tradução de mensagens de erro
 

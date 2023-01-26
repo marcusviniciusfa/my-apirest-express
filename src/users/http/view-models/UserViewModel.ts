@@ -1,8 +1,8 @@
-import { ShowUserDTO } from '@/users/dtos/ShowUserDTO'
+import { ShowProfileDTO } from '@/users/dtos/ShowProfileDTO'
 import { User } from '../../database/entities/User'
 
-export class UserViewModel {
-  static toHttp(user: User): ShowUserDTO {
+class UserViewModel {
+  toHttp(user: User): ShowProfileDTO {
     return {
       id: user.id,
       name: user.name,
@@ -10,7 +10,14 @@ export class UserViewModel {
       isAdmin: user.isAdmin,
       role: user.role,
       created_at: user.created_at,
-      avatar_url: user.avatar ? `${process.env.API_BASE_URL}/files/${user.avatar}` : null,
+      avatar_url: this.generateAvatarUrl(user),
     }
   }
+
+  private generateAvatarUrl(user: User): string | null {
+    return user.avatar ? `${process.env.API_BASE_URL}/files/${user.avatar}` : null
+  }
 }
+
+const userViewModel = new UserViewModel()
+export { userViewModel }

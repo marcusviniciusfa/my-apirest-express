@@ -1,6 +1,6 @@
 import { Request, Response } from 'express'
 import { container } from 'tsyringe'
-import { UserViewModel } from '../http/view-models/UserViewModel'
+import { userViewModel } from '../http/view-models/UserViewModel'
 import { ListUsersUseCase } from '../use-cases/ListUsersUseCase'
 import { IUsersController } from './IUsersController'
 
@@ -24,7 +24,7 @@ export class ListUsersController implements IUsersController {
     const users = await this.listUsersUseCase.execute({ page, limit })
     return res.status(200).json({
       ...users,
-      data: users.data.map(UserViewModel.toHttp),
+      data: users.data.map(a => userViewModel.toHttp(a)),
     })
   }
 }

@@ -10,6 +10,7 @@ const createUserController: IUsersController = container.resolve('CreateUserCont
 const listUsersController: IUsersController = container.resolve('ListUsersController')
 const createLoginController: IUsersController = container.resolve('CreateLoginController')
 const upInsertAvatarController: IUsersController = container.resolve('UpInsertAvatarController')
+const showProfileController: IUsersController = container.resolve('ShowProfileController')
 
 const usersRouter = Router()
 
@@ -53,6 +54,7 @@ usersRouter.post('/login', (req, res) => {
         email: { type: 'string', pattern: PATTERN.EMAIL },
         password: { type: 'string', pattern: PATTERN.PASSWORD },
       },
+      required: ['email', 'password'],
     },
     req.body,
   )
@@ -68,6 +70,20 @@ usersRouter.post('/profile', multer(uploadConfig).single('file'), (req, res) => 
     req,
   )
   return upInsertAvatarController.handler(req, res)
+})
+
+usersRouter.get('/profile/:id', (req, res) => {
+  validator(
+    {
+      type: 'object',
+      properties: {
+        id: { type: 'string', pattern: PATTERN.UUID },
+      },
+      required: ['id'],
+    },
+    req.params,
+  )
+  return showProfileController.handler(req, res)
 })
 
 export { usersRouter }
