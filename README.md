@@ -46,6 +46,7 @@
 - [ ] BDD com Cucumber
 - [ ] Salvar avatar no Simple Storage Service (S3) da AWS
 - [ ] i18n para tradução de mensagens de erro
+- [ ] Documentação opção de documentação `pt-br` no Swagger
 
 ## Anotações
 

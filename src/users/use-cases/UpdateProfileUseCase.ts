@@ -8,27 +8,27 @@ import { UpdateUserDTO } from '../dtos/UpdateUserDTO'
 import { IUsersRepository } from '../repositories/IUsersRepository'
 
 @injectable()
-export class UpdateUserUseCase {
+export class UpdateProfileUseCase {
   constructor(@inject('UsersRepository') private usersRepository: IUsersRepository, @inject('RolesRepository') private rolesRepository: IRolesRepository) {}
 
-  async execute({ id, name, email, new_password, old_password }: UpdateUserDTO): Promise<User> {
+  async execute({ id, name, email, newPassword, oldPassword }: UpdateUserDTO): Promise<User> {
     const user = await this.usersRepository.findById(id)
     if (!user) {
-      throw new NotFoundError('user not found 🔎')
+      throw new NotFoundError('user not found')
     }
     const emailAlreadyExists = await this.usersRepository.findByEmail(email)
     if (emailAlreadyExists && user.id !== id) {
-      throw new BadRequestError(`there is already one user with this email ❌`)
+      throw new BadRequestError(`there is already one user with this email`)
     }
-    if (new_password) {
-      if (!old_password) {
-        throw new BadRequestError(`old password is needed to reset a new one ❌`)
+    if (newPassword) {
+      if (!oldPassword) {
+        throw new BadRequestError(`old password is needed to reset a new one`)
       }
-      const oldPasswordIsValid = nativeCrypto.compare(old_password, user.password)
+      const oldPasswordIsValid = nativeCrypto.compare(oldPassword, user.password)
       if (!oldPasswordIsValid) {
-        throw new BadRequestError(`old password does not match ❌`)
+        throw new BadRequestError(`old password does not match`)
       }
-      user.password = nativeCrypto.encrypt(new_password)
+      user.password = nativeCrypto.encrypt(newPassword)
     }
     return this.usersRepository.update({ ...user, name, email })
   }

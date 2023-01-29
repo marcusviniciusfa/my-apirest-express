@@ -11,7 +11,7 @@ const listUsersController: IUsersController = container.resolve('ListUsersContro
 const createLoginController: IUsersController = container.resolve('CreateLoginController')
 const upInsertAvatarController: IUsersController = container.resolve('UpInsertAvatarController')
 const showProfileController: IUsersController = container.resolve('ShowProfileController')
-const updateUserController: IUsersController = container.resolve('UpdateUserController')
+const updateProfileController: IUsersController = container.resolve('UpdateProfileController')
 
 const usersRouter = Router()
 
@@ -23,10 +23,10 @@ usersRouter.post('/', (req, res) => {
         name: { type: 'string' },
         email: { type: 'string', pattern: PATTERN.EMAIL },
         password: { type: 'string', pattern: PATTERN.PASSWORD },
-        isAdmin: { type: 'boolean' },
+        is_admin: { type: 'boolean' },
         roleId: { type: 'string', pattern: PATTERN.UUID },
       },
-      required: ['name', 'email', 'password', 'isAdmin', 'roleId'],
+      required: ['name', 'email', 'password', 'is_admin', 'role_id'],
     },
     req.body,
   )
@@ -102,7 +102,7 @@ usersRouter.put('/profile/:id', (req, res) => {
     },
     { ...req.body, ...req.params },
   )
-  return updateUserController.handler(req, res)
+  return updateProfileController.handler(req, res)
 })
 
 export { usersRouter }

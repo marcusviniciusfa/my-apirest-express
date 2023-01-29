@@ -8,12 +8,12 @@ export async function authentication(req: Request, _res: Response, next: NextFun
   if (!allowedRoutesPattern.test(req.path)) {
     const { authorization } = req.headers
     if (!authorization) {
-      throw new Unauthorized('failed to verify access token 🔒')
+      throw new Unauthorized('failed to verify access token')
     }
     const token = authorization.replace('Bearer', '').trim()
     const decodeToken = jwtAuth.decodeToken(token)
     if (!decodeToken) {
-      throw new Unauthorized('unauthenticated user 🔒')
+      throw new Unauthorized('unauthenticated user')
     }
     req.user = { id: decodeToken.subject }
   }

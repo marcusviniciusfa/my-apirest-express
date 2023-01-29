@@ -12,9 +12,9 @@ export class ShowProfileController implements IUsersController {
   }
 
   async handler(req: Request, res: Response): Promise<Response> {
-    const { id: userId } = req.body
-    const rawUser = await this.showProfileUseCase.execute({ userId })
-    const user = userViewModel.toHttp(rawUser)
-    return res.status(200).json(user)
+    const { id: userId } = req.params
+    const user = await this.showProfileUseCase.execute({ userId })
+    const profileDTO = userViewModel.toHttp(user)
+    return res.status(200).json(profileDTO)
   }
 }

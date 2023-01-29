@@ -12,7 +12,7 @@ export class CreateRoleUseCase {
   async execute({ name }: CreateRoleDTO): Promise<Role> {
     const roleAlreadyExixts = await this.rolesRepository.findByName(name)
     if (roleAlreadyExixts) {
-      throw new BadRequestError('role already exists ❌')
+      throw new BadRequestError('role already exists')
     }
     return this.rolesRepository.create({ name })
   }

@@ -15,7 +15,7 @@ export class UpInsertAvatarUseCase {
   async execute({ id, avatar }: UpInsertAvatarDTO): Promise<User> {
     const user = await this.usersRepository.findById(id)
     if (!user) {
-      throw new NotFoundError('user not found 🔎')
+      throw new NotFoundError('user not found')
     }
 
     if (user.avatar) {

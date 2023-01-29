@@ -18,7 +18,7 @@ export class CreateRolesTable1668986011952 implements MigrationInterface {
           isUnique: true,
         },
         {
-          name: 'created_at',
+          name: 'createdAt',
           type: 'timestamp',
           default: 'CURRENT_TIMESTAMP',
         },

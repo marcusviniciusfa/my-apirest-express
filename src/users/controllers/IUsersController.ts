@@ -1,5 +1,5 @@
 import { Request, Response } from 'express'
 
 export interface IUsersController {
-  handler(req: Request, res: Response): Promise<Response>
+  handler<T>(req: Request, res: Response): Promise<Response<T>>
 }

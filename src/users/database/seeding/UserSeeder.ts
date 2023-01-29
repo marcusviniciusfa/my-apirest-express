@@ -18,14 +18,14 @@ export class UserSeeder implements Seeder {
         new User(
           'admin',
           'user.admin@email.com',
-          nativeCrypto.encrypt('12345678', process.env.ENCRYPTION_KEY),
+          nativeCrypto.encrypt('12345678'),
           true,
           role
           ),
       )
       console.log('admin user was successfully created! 🎉')
     } catch (error) {
-      console.error('could not create admin user')
+      console.error('could not create admin user ❌')
       throw new Error(error);
     }
   }

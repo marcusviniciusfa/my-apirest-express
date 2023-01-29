@@ -5,7 +5,7 @@ import { ListUsersUseCase } from '../use-cases/ListUsersUseCase'
 import { IUsersController } from './IUsersController'
 
 const DEFAULT_PAGE = 1
-const DEFAULT_LIMIT = 15
+const DEFAULT_LIMIT = 10
 
 export class ListUsersController implements IUsersController {
   private listUsersUseCase: ListUsersUseCase
@@ -24,7 +24,7 @@ export class ListUsersController implements IUsersController {
     const users = await this.listUsersUseCase.execute({ page, limit })
     return res.status(200).json({
       ...users,
-      data: users.data.map(a => userViewModel.toHttp(a)),
+      data: users.data.map(user => userViewModel.toHttp(user)),
     })
   }
 }

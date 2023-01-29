@@ -32,10 +32,10 @@ const uploadConfig: UploadConfig = {
     file.size = file.size || Number(req.headers['content-length'])
     const allowedMimeTypes = ['image/png', 'image/jpeg']
     if (!allowedMimeTypes.includes(file.mimetype)) {
-      return callback(new BadRequestError(`invalid file type. must be one of the following extensions ${allowedMimeTypes.join(' or ').replace(/image\//g, '.')} ❌`))
+      return callback(new BadRequestError(`invalid file type. must be one of the following extensions ${allowedMimeTypes.join(' or ').replace(/image\//g, '.')}`))
     }
     if (file.size > FILE.MAXIMUM_SIZE_IN_BYTES) {
-      return callback(new BadRequestError(`the file has exceeded the maximum size of ${FILE.MAXIMUM_SIZE_IN_BYTES / 1024}KB ❌`))
+      return callback(new BadRequestError(`the file has exceeded the maximum size of ${FILE.MAXIMUM_SIZE_IN_BYTES / 1024}KB`))
     }
     callback(null, true)
   },

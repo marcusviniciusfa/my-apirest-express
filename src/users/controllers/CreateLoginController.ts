@@ -13,8 +13,8 @@ export class CreateLoginController implements IUsersController {
 
   async handler(req: Request, res: Response): Promise<Response> {
     const { email, password } = req.body
-    const { user: rawUser, token } = await this.createLoginUseCase.execute({ email, password })
-    const user = userViewModel.toHttp(rawUser)
-    return res.status(201).json({ user, token })
+    const { user, token } = await this.createLoginUseCase.execute({ email, password })
+    const profileDTO = userViewModel.toHttp(user)
+    return res.status(201).json({ user: profileDTO, token })
   }
 }

@@ -7,9 +7,9 @@ class UserViewModel {
       id: user.id,
       name: user.name,
       email: user.email,
-      isAdmin: user.isAdmin,
-      role: user.role,
-      created_at: user.created_at,
+      is_admin: user.isAdmin,
+      role_id: user.role.id,
+      created_at: user.createdAt,
       avatar_url: this.generateAvatarUrl(user),
     }
   }

@@ -1,6 +1,7 @@
 import { ShowRoleUseCase } from '@/roles/use-cases/ShowRoleUseCase'
 import { Request, Response } from 'express'
 import { container } from 'tsyringe'
+import { roleViewModel } from '../http/view-models/RoleViewModel'
 import { IRolesController } from './IRolesController'
 
 export class ShowRoleController implements IRolesController {
@@ -13,6 +14,7 @@ export class ShowRoleController implements IRolesController {
   async handler(req: Request, res: Response): Promise<Response> {
     const { id } = req.params
     const role = await this.showRoleUseCase.execute({ id })
-    return res.status(200).json(role)
+    const roleDTO = roleViewModel.toHttp(role)
+    return res.status(200).json(roleDTO)
   }
 }

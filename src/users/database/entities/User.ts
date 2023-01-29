@@ -19,18 +19,19 @@ export class User {
   @Column()
   isAdmin: boolean
 
-  @Column()
+  @Column({ nullable: true })
   avatar?: string
 
   @Column()
-  created_at: Date
+  createdAt: Date
 
   @ManyToOne(() => Role, {
     cascade: true,
+    eager: true,
   })
   role: Role
 
   constructor(name: string, email: string, password: string, isAdmin: boolean, role: Role) {
-    Object.assign(this, { name, email, password, isAdmin, role, id: randomUUID(), created_at: new Date() })
+    Object.assign(this, { name, email, password, isAdmin, role, id: randomUUID(), createdAt: new Date() })
   }
 }

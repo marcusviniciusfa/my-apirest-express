@@ -12,9 +12,9 @@ export class CreateUserController implements IUsersController {
   }
 
   async handler(req: Request, res: Response): Promise<Response> {
-    const { name, email, password, isAdmin, roleId } = req.body
-    const rawUser = await this.createUserUseCase.execute({ name, email, password, isAdmin, roleId })
-    const user = userViewModel.toHttp(rawUser)
-    return res.status(201).json(user)
+    const { name, email, password, is_admin: isAdmin, role_id: roleId } = req.body
+    const user = await this.createUserUseCase.execute({ name, email, password, isAdmin, roleId })
+    const profileDTO = userViewModel.toHttp(user)
+    return res.status(201).json(profileDTO)
   }
 }

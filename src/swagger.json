@@ -1,66 +1,75 @@
 {
-  "openapi":"3.0.3",
-  "info":{
-    "title":"Swagger App My Api - OpenAPI 3.0",
-    "version":"1.0.0",
-    "description":"This is a sample App My Api Server based on the OpenAPI 3.0 specification",
-    "contact":{
-      "name":"Marcus Vinicius",
-      "email":"marcusviniciusfabr@gmail.com"
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Swagger My API Express - OpenAPI 3.0",
+    "version": "1.0.0",
+    "description": "This is a sample My API Express based on the OpenAPI 3.0 specification",
+    "contact": {
+      "name": "Marcus Vinicius",
+      "email": "marcusviniciusfa.dev@gmail.com"
     }
   },
-  "tags":[
+  "servers": [
     {
-      "name":"role",
-      "description":"Everything about Roles"
+      "url": "http://localhost:3000/api/{version}",
+      "description": "Local server",
+      "variables": {
+        "version": {
+          "default": "v1"
+        }
+      }
     }
   ],
-  "paths":{
-    "/roles":{
-      "get":{
-        "tags":[
+  "tags": [
+    {
+      "name": "role",
+      "description": "about Roles"
+    },
+    {
+      "name": "user",
+      "description": "about Users"
+    }
+  ],
+  "paths": {
+    "/roles": {
+      "get": {
+        "tags": [
           "role"
         ],
-        "summary":"List all roles",
-        "description":"Return all roles paginated",
-        "parameters":[
+        "summary": "List all roles",
+        "description": "Return all roles paginated",
+        "parameters": [
           {
-            "name":"page",
-            "in":"query",
-            "description":"Current page",
-            "required": true
+            "$ref": "#/components/parameters/pageParam"
           },
           {
-            "name":"limit",
-            "in":"query",
-            "description":"Number of documents per page",
-            "required": true
+            "$ref": "#/components/parameters/limitParam"
           }
         ],
-        "responses":{
-          "200":{
-            "description":"Ok",
-            "content":{
-              "application/json":{
-                "schema":{
-                  "type":"object",
-                  "properties":{
-                    "per_page":{
-                      "type":"number",
-                      "example":10
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "per_page": {
+                      "type": "number",
+                      "example": 10
                     },
-                    "current_page":{
-                      "type":"number",
-                      "example":1
+                    "current_page": {
+                      "type": "number",
+                      "example": 1
                     },
-                    "total":{
-                      "type":"number",
-                      "example":11
+                    "total": {
+                      "type": "number",
+                      "example": 1
                     },
-                    "data":{
-                      "type":"array",
-                      "items":{
-                        "$ref":"#/components/schemas/Role"
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Role"
                       }
                     }
                   }
@@ -68,333 +77,939 @@
               }
             }
           },
-          "400":{
-            "description":"Bad request",
-            "content":{
-              "application/json":{
-                "schema":{
-                  "type":"object",
-                  "properties":{
-                    "status":{
-                      "type":"string",
-                      "example":"error"
-                    },
-                    "message":{
-                      "type":"string",
-                      "example":"data/page must match pattern \"^[0-9]+\""
-                    }
-                  }
-                }
-              }
-            }
+          "401": {
+            "$ref": "#/components/responses/401GenericUnauthorized"
           },
-          "500":{
-            "description":"Internal server error"
+          "500": {
+            "$ref": "#/components/responses/500GenericInternalServerError"
           }
-        }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
       },
-      "post":{
-        "tags":[
+      "post": {
+        "tags": [
           "role"
         ],
-        "summary":"Create a new role",
-        "description":"Create a new role if it doesn't exist yet",
-        "requestBody":{
-          "content":{
-            "application/json":{
-              "schema":{
-                "type":"object",
-                "properties":{
-                  "name":{
-                    "type":"string",
-                    "example":"Admin"
+        "summary": "Create a new role",
+        "description": "Create a new role if it doesn't exist yet",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "example": "admin"
                   }
                 }
               }
             }
           },
-          "required":true
+          "required": true
         },
-        "responses":{
-          "201":{
-            "description":"Created",
-            "content":{
-              "application/json":{
-                "schema":{
-                  "$ref":"#/components/schemas/Role"
-                }
-              }
-            }
+        "responses": {
+          "201": {
+            "$ref": "#/components/responses/201RoleCreated"
           },
-          "400":{
-            "description":"Bad request",
-            "content":{
-              "application/json":{
-                "schema":{
-                  "type":"object",
-                  "properties":{
-                    "status":{
-                      "type":"string",
-                      "example":"error"
-                    },
-                    "message":{
-                      "type":"string",
-                      "example":"Role already exists"
-                    }
-                  }
-                }
-              }
-            }
+          "401": {
+            "$ref": "#/components/responses/401GenericUnauthorized"
           },
-          "500":{
-            "description":"Internal server error"
+          "400": {
+            "$ref": "#/components/responses/400RoleBadRequest"
+          },
+          "500": {
+            "$ref": "#/components/responses/500GenericInternalServerError"
           }
-        }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
       }
     },
-    "/roles/{id}":{
-      "get":{
-        "tags":[
+    "/roles/{id}": {
+      "get": {
+        "tags": [
           "role"
         ],
-        "summary":"Show a role",
-        "description":"Return a role by Id",
-        "parameters":[
+        "summary": "Show a role",
+        "description": "Return a role by Id",
+        "parameters": [
           {
-            "name":"id",
-            "in":"path",
-            "description":"Role Id",
-            "required": true
+            "$ref": "#/components/parameters/roleIdParam"
           }
         ],
-        "responses":{
-          "200":{
-            "description":"Ok",
-            "content":{
-              "application/json":{
-                "schema":{
-                  "$ref":"#/components/schemas/Role"
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Role"
                 }
               }
             }
           },
-          "400":{
-            "description":"Bad request",
-            "content":{
-              "application/json":{
-                "schema":{
-                  "type":"object",
-                  "properties":{
-                    "status":{
-                      "type":"string",
-                      "example":"error"
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "default": "error"
                     },
-                    "message":{
-                      "type":"string",
-                      "example":"data/id must match pattern \"^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$\""
+                    "message": {
+                      "type": "string",
+                      "default": "data/id must match pattern \"^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$\" ❌"
                     }
                   }
                 }
               }
             }
           },
-          "404":{
-            "description":"Not found",
-            "content":{
-              "application/json":{
-                "schema":{
-                  "type":"object",
-                  "properties":{
-                    "status":{
-                      "type":"string",
-                      "example":"error"
-                    },
-                    "message":{
-                      "type":"string",
-                      "example":"Role not found"
-                    }
-                  }
-                }
-              }
-            }
+          "401": {
+            "$ref": "#/components/responses/401GenericUnauthorized"
           },
-          "500":{
-            "description":"Internal server error"
-          }
-        }
-      },
-      "put":{
-        "tags":[
-          "role"
-        ],
-        "summary":"Update an existing role",
-        "description":"Update an existing role by Id",
-        "parameters":[
-          {
-            "name":"id",
-            "in":"path",
-            "description":"Role Id",
-            "required": true
-          }
-        ],
-        "requestBody":{
-          "content":{
-            "application/json":{
-              "schema":{
-                "type":"object",
-                "properties":{
-                  "name":{
-                    "type":"string",
-                    "example":"Admin"
-                  }
-                }
-              }
-            }
+          "404": {
+            "$ref": "#/components/responses/404RoleNotFound"
           },
-          "required":true
+          "500": {
+            "$ref": "#/components/responses/500GenericInternalServerError"
+          }
         },
-        "responses":{
-          "200":{
-            "description":"Ok",
-            "content":{
-              "application/json":{
-                "schema":{
-                  "$ref":"#/components/schemas/Role"
-                }
-              }
-            }
-          },
-          "400":{
-            "description":"Bad request",
-            "content":{
-              "application/json":{
-                "schema":{
-                  "type":"object",
-                  "properties":{
-                    "status":{
-                      "type":"string",
-                      "example":"error"
-                    },
-                    "message":{
-                      "type":"string",
-                      "example":"data/id must match pattern \"^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$\""
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "404":{
-            "description":"Not found",
-            "content":{
-              "application/json":{
-                "schema":{
-                  "type":"object",
-                  "properties":{
-                    "status":{
-                      "type":"string",
-                      "example":"error"
-                    },
-                    "message":{
-                      "type":"string",
-                      "example":"Role not found"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "500":{
-            "description":"Internal server error"
+        "security": [
+          {
+            "bearerAuth": []
           }
-        }
+        ]
       },
-      "delete":{
-        "tags":[
+      "put": {
+        "tags": [
           "role"
         ],
-        "summary":"Delete an existing role",
-        "description":"Delete an existing role by Id",
-        "parameters":[
+        "summary": "Update an existing role",
+        "description": "Update an existing role by id",
+        "parameters": [
           {
-            "name":"id",
-            "in":"path",
-            "description":"Role Id",
-            "required": true
+            "$ref": "#/components/parameters/roleIdParam"
           }
         ],
-        "responses":{
-          "204":{
-            "description":"No content"
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "example": "admin"
+                  }
+                }
+              }
+            }
           },
-          "400":{
-            "description":"Bad request",
-            "content":{
-              "application/json":{
-                "schema":{
-                  "type":"object",
-                  "properties":{
-                    "status":{
-                      "type":"string",
-                      "example":"error"
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200RoleOk"
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "default": "error"
                     },
-                    "message":{
-                      "type":"string",
-                      "example":"data/id must match pattern \"^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$\""
+                    "message": {
+                      "type": "string",
+                      "default": "data/id must match pattern \"^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$\" ❌"
                     }
                   }
                 }
               }
             }
           },
-          "404":{
-            "description":"Not found",
-            "content":{
-              "application/json":{
-                "schema":{
-                  "type":"object",
-                  "properties":{
-                    "status":{
-                      "type":"string",
-                      "example":"error"
+          "401": {
+            "$ref": "#/components/responses/401GenericUnauthorized"
+          },
+          "404": {
+            "$ref": "#/components/responses/404RoleNotFound"
+          },
+          "500": {
+            "$ref": "#/components/responses/500GenericInternalServerError"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      },
+      "delete": {
+        "tags": [
+          "role"
+        ],
+        "summary": "Delete an existing role",
+        "description": "Delete an existing role by Id",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/roleIdParam"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No content"
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "error"
                     },
-                    "message":{
-                      "type":"string",
-                      "example":"Role not found"
+                    "message": {
+                      "type": "string",
+                      "example": "data/id must match pattern \"^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$\" ❌"
                     }
                   }
                 }
               }
             }
           },
-          "500":{
-            "description":"Internal server error"
+          "401": {
+            "$ref": "#/components/responses/401GenericUnauthorized"
+          },
+          "404": {
+            "$ref": "#/components/responses/404RoleNotFound"
+          },
+          "500": {
+            "$ref": "#/components/responses/500GenericInternalServerError"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/users": {
+      "get": {
+        "tags": [
+          "user"
+        ],
+        "summary": "List all users",
+        "description": "Return all users paginated",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/pageParam"
+          },
+          {
+            "$ref": "#/components/parameters/limitParam"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "per_page": {
+                      "type": "number",
+                      "example": 10
+                    },
+                    "current_page": {
+                      "type": "number",
+                      "example": 1
+                    },
+                    "total": {
+                      "type": "number",
+                      "example": 1
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/User"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/401GenericUnauthorized"
+          },
+          "500": {
+            "$ref": "#/components/responses/500GenericInternalServerError"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Create a new user",
+        "description": "Create a new user if it doesn't exist yet",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "example": "Jack"
+                  },
+                  "email": {
+                    "type": "string",
+                    "example": "jack@email.com"
+                  },
+                  "password": {
+                    "type": "string",
+                    "example": "12345678",
+                    "minLength": 8
+                  },
+                  "is_admin": {
+                    "type": "boolean",
+                    "example": false
+                  },
+                  "role_id": {
+                    "type": "string",
+                    "format": "uuid",
+                    "example": "29320837-afec-4c56-920f-d2d5522fa421"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "$ref": "#/components/responses/201UserCreated"
+          },
+          "400": {
+            "$ref": "#/components/responses/400UserBadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/401GenericUnauthorized"
+          },
+          "500": {
+            "$ref": "#/components/responses/500GenericInternalServerError"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/users/profile": {
+      "post": {
+        "tags": [
+          "user"
+        ],
+        "summary": "UpInsert user avatar",
+        "description": "Insert or update a user's avatar",
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "file": {
+                    "type": "string",
+                    "format": "binary"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "$ref": "#/components/responses/201UserCreated"
+          },
+          "400": {
+            "$ref": "#/components/responses/400UserBadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/401GenericUnauthorized"
+          },
+          "500": {
+            "$ref": "#/components/responses/500GenericInternalServerError"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/users/profile/{id}": {
+      "get": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Show a user profile",
+        "description": "Return a user by Id",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/userIdParam"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200UserOk"
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "default": "error"
+                    },
+                    "message": {
+                      "type": "string",
+                      "default": "data/id must match pattern \"^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$\" ❌"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/401GenericUnauthorized"
+          },
+          "404": {
+            "$ref": "#/components/responses/404UserNotFound"
+          },
+          "500": {
+            "$ref": "#/components/responses/500GenericInternalServerError"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      },
+      "put": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Update a user profile",
+        "description": "Update a user by Id",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/userIdParam"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "example": "Jack"
+                  },
+                  "email": {
+                    "type": "string",
+                    "example": "jack@email.com"
+                  },
+                  "old_password": {
+                    "type": "string",
+                    "example": "12345678",
+                    "minLength": 8
+                  },
+                  "new_password": {
+                    "type": "string",
+                    "example": "87654321",
+                    "minLength": 8
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200UserOk"
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "default": "error"
+                    },
+                    "message": {
+                      "type": "string",
+                      "default": "old password does not match ❌"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/401GenericUnauthorized"
+          },
+          "404": {
+            "$ref": "#/components/responses/404UserNotFound"
+          },
+          "500": {
+            "$ref": "#/components/responses/500GenericInternalServerError"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/users/login": {
+      "post": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Authenticate a user",
+        "description": "Checks that the user has access to the API routes and returns an access token",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "type": "string",
+                    "example": "jack@email.com"
+                  },
+                  "password": {
+                    "type": "string",
+                    "example": "12345678",
+                    "minLength": 8
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "user": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "format": "uuid",
+                          "example": "847c4f08-ec9f-4b7f-b452-12d69d86efbe"
+                        },
+                        "name": {
+                          "type": "string",
+                          "example": "Jack"
+                        },
+                        "email": {
+                          "type": "string",
+                          "example": "jack@email.com"
+                        },
+                        "password": {
+                          "type": "string",
+                          "example": "12345678",
+                          "minLength": 8
+                        },
+                        "is_admin": {
+                          "type": "boolean",
+                          "example": false
+                        },
+                        "avatar_url": {
+                          "type": "string",
+                          "format": "url",
+                          "example": "http://localhost:3000/files/fd9a6444ba7b0a8f3ad1fff050edd669_avatar.jpeg"
+                        },
+                        "created_at": {
+                          "type": "string",
+                          "format": "date-time",
+                          "example": "1970-01-01T00:00:00.000Z"
+                        },
+                        "role_id": {
+                          "type": "string",
+                          "format": "uuid",
+                          "example": "847c4f08-ec9f-4b7f-b452-12d69d86efbe"
+                        }
+                      }
+                    },
+                    "token": {
+                      "type": "string",
+                      "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InVzZXIuYWRtaW5AZW1haWwuY29tIiwiaWF0IjoxNjc0Nzc0NzM1LCJleHAiOjE2NzQ4NjExMzUsInN1YiI6IjEwODcyOGFlLTgyNGQtNGY2MC05YzQzLWI1MzMxY2U5ODJlOSJ9.yPDgvdwWW1-Dl9rwQWZoXDlYuVW1_x0FjgINFKjjjPM"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "default": "error"
+                    },
+                    "message": {
+                      "type": "string",
+                      "default": "data/email must match pattern \"^[^@ \t\r\n]+@[^@ \t\r\n]+.[^@ \t\r\n]+$\" ❌"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "default": "error"
+                    },
+                    "message": {
+                      "type": "string",
+                      "default": "incorrect email/password combination 🔒"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "$ref": "#/components/responses/500GenericInternalServerError"
           }
         }
       }
     }
   },
-  "components":{
-    "schemas":{
-      "Role":{
-        "type":"object",
-        "properties":{
-          "id":{
-            "type":"string",
-            "format":"uuid",
-            "example":"f408156b-af0b-46da-916a-63488bcef1ae"
-          },
-          "name":{
-            "type":"string",
-            "example":"Admin"
-          },
-          "created_at":{
-            "type":"string",
-            "format":"Date",
-            "example":"2022-11-26T23:11:23.346Z"
+  "components": {
+    "responses": {
+      "201RoleCreated": {
+        "description": "Created",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Role"
+            }
           }
+        }
+      },
+      "201UserCreated": {
+        "description": "Created",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/User"
+            }
+          }
+        }
+      },
+      "200RoleOk": {
+        "description": "Ok",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Role"
+            }
+          }
+        }
+      },
+      "200UserOk": {
+        "description": "Ok",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/User"
+            }
+          }
+        }
+      },
+      "400RoleBadRequest": {
+        "description": "Bad request",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string",
+                  "default": "error"
+                },
+                "message": {
+                  "type": "string",
+                  "default": "role already exists ❌"
+                }
+              }
+            }
+          }
+        }
+      },
+      "400UserBadRequest": {
+        "description": "Bad request",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string",
+                  "default": "error"
+                },
+                "message": {
+                  "type": "string",
+                  "default": "user already exists ❌"
+                }
+              }
+            }
+          }
+        }
+      },
+      "401GenericUnauthorized": {
+        "description": "Unauthorized",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string",
+                  "default": "error"
+                },
+                "message": {
+                  "type": "string",
+                  "default": "unauthenticated user 🔒"
+                }
+              }
+            }
+          }
+        }
+      },
+      "404RoleNotFound": {
+        "description": "Not found",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "status": {
+                    "type": "string",
+                    "default": "error"
+                  },
+                  "message": {
+                    "type": "string",
+                    "default": "role not found 🔎"
+                  }
+                }
+              }
+            }
+          }
+      },
+      "404UserNotFound": {
+        "description": "Not found",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "status": {
+                    "type": "string",
+                    "default": "error"
+                  },
+                  "message": {
+                    "type": "string",
+                    "default": "user not found 🔎"
+                  }
+                }
+              }
+            }
+          }
+      },
+      "500GenericInternalServerError": {
+        "description": "Internal server error",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string",
+                  "default": "error"
+                },
+                "message": {
+                  "type": "string",
+                  "default": "internal server error 💥"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "parameters": {
+      "pageParam": {
+        "name": "page",
+        "in": "query",
+        "description": "Current page",
+        "schema": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 1,
+          "default": 1
+        }
+      },
+      "limitParam": {
+        "name": "limit",
+        "in": "query",
+        "description": "Number of documents per page",
+        "schema": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 1,
+          "default": 10
+        }
+      },
+      "roleIdParam": {
+        "name": "id",
+        "in": "path",
+        "required": true,
+        "description": "Role id",
+        "schema": {
+          "type": "string",
+          "format": "uuid"
+        }
+      },
+      "userIdParam": {
+        "name": "id",
+        "in": "path",
+        "required": true,
+        "description": "User id",
+        "schema": {
+          "type": "string",
+          "format": "uuid"
+        }
+      }
+    },
+    "schemas": {
+      "Role": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "example": "29320837-afec-4c56-920f-d2d5522fa421"
+          },
+          "name": {
+            "type": "string",
+            "example": "admin"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "example": "1970-01-01T00:00:00.000Z"
+          }
+        }
+      },
+      "User": {
+        "type": "object",
+        "properties": {
+            "id": {
+              "type": "string",
+              "format": "uuid",
+              "example": "847c4f08-ec9f-4b7f-b452-12d69d86efbe"
+            },
+            "name": {
+              "type": "string",
+              "example": "Jack"
+            },
+            "email": {
+              "type": "string",
+              "example": "jack@email.com"
+            },
+            "is_admin": {
+              "type": "boolean",
+              "example": false
+            },
+            "avatar_url": {
+              "type": "string",
+              "format": "url",
+              "example": "http://localhost:3000/files/fd9a6444ba7b0a8f3ad1fff050edd669_avatar.jpeg"
+            },
+            "created_at": {
+              "type": "string",
+              "format": "date-time",
+              "example": "1970-01-01T00:00:00.000Z"
+            },
+            "role_id": {
+              "type": "string",
+              "format": "uuid",
+              "example": "29320837-afec-4c56-920f-d2d5522fa421"
+            }
+          }
+        }
+      },
+      "securitySchemes": {
+        "bearerAuth": {
+          "type": "http",
+          "scheme": "bearer",
+          "bearerFormat": "JWT",
+          "description": "login to endpoint users/login with admin user email and password"
         }
       }
     }
   }
-}

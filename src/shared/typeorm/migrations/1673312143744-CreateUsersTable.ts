@@ -36,7 +36,7 @@ export class CreateUsersTable1673312143744 implements MigrationInterface {
           default: false,
         },
         {
-          name: 'created_at',
+          name: 'createdAt',
           type: 'timestamp',
           default: 'CURRENT_TIMESTAMP',
         },

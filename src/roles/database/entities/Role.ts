@@ -10,11 +10,11 @@ export class Role {
   name: string
 
   @CreateDateColumn()
-  created_at: Date
+  createdAt: Date
 
   constructor(name: string) {
     this.id = randomUUID()
-    this.created_at = new Date()
+    this.createdAt = new Date()
     this.name = name
   }
 }

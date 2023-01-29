@@ -1,6 +1,7 @@
 import { UpdateRoleUseCase } from '@/roles/use-cases/UpdateRoleUseCase'
 import { Request, Response } from 'express'
 import { container } from 'tsyringe'
+import { roleViewModel } from '../http/view-models/RoleViewModel'
 import { IRolesController } from './IRolesController'
 
 export class UpdateRoleController implements IRolesController {
@@ -14,6 +15,7 @@ export class UpdateRoleController implements IRolesController {
     const { id } = req.params
     const { name } = req.body
     const role = await this.updateRoleUseCase.execute({ id, name })
-    return res.status(200).json(role)
+    const roleDTO = roleViewModel.toHttp(role)
+    return res.status(200).json(roleDTO)
   }
 }

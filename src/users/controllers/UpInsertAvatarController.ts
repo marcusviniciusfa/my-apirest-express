@@ -14,8 +14,8 @@ export class UpInsertAvatarController implements IUsersController {
   async handler(req: Request, res: Response): Promise<Response> {
     // eslint-disable-next-line prettier/prettier
     const { file: { filename: avatar }, user: { id } } = req
-    const rawUser = await this.upInsertAvatarUseCase.execute({ id, avatar })
-    const user = userViewModel.toHttp(rawUser)
-    return res.status(201).json(user)
+    const user = await this.upInsertAvatarUseCase.execute({ id, avatar })
+    const profileDTO = userViewModel.toHttp(user)
+    return res.status(201).json(profileDTO)
   }
 }
