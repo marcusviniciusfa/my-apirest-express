@@ -62,6 +62,9 @@ npm run typeorm migration:run
 # mostra todas as migrations e se elas foram executadas ou não
 npm run typeorm migration:show
 
+# desfaz a última migration executada
+npm run typeorm migration:revert
+
 # exclui completamente os dados do banco de dados
 npm run typeorm schema:drop
 ~~~

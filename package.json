@@ -1,7 +1,15 @@
 {
-  "name": "app-my-api",
+  "name": "my-api-express",
   "version": "1.0.0",
-  "description": "",
+  "description": "Back-End application with ExpressJS, to register users and roles",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/marcusviniciusfa/my-api-express"
+  },
+  "author": {
+    "name": "Marcus Vinicius",
+    "email": "marcusvinicius.dev@gmail.com"
+  },
   "main": "index.js",
   "scripts": {
     "build": "rimraf dist && npx tsc",
@@ -13,8 +21,6 @@
     "prepare": "husky install",
     "commit": "git-cz"
   },
-  "keywords": [],
-  "author": "",
   "license": "ISC",
   "devDependencies": {
     "@commitlint/cli": "^17.4.0",
