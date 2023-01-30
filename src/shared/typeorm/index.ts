@@ -1,4 +1,5 @@
 import { Role } from '@/roles/database/entities/Role'
+import { RefreshToken } from '@/users/database/entities/RefreshToken'
 import { User } from '@/users/database/entities/User'
 import { UserSeeder } from '@/users/database/seeding/UserSeeder'
 import { DataSource, DataSourceOptions } from 'typeorm'
@@ -11,7 +12,7 @@ import { CreateRefreshTokensTable1675093171932 } from './migrations/167509317193
 const options: DataSourceOptions & SeederOptions = {
   type: 'sqlite',
   database: './db.sqlite',
-  entities: [Role, User],
+  entities: [Role, User, RefreshToken],
   migrations: [CreateRolesTable1668986011952, CreateUsersTable1673312143744, AddRoleIdToUsersTable1673313376233, CreateRefreshTokensTable1675093171932],
   seeds: [UserSeeder],
 }
