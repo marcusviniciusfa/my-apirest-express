@@ -13,9 +13,6 @@ export class RefreshToken {
   valid: boolean
 
   @Column()
-  password: string
-
-  @Column()
   expires: Date
 
   @Column()
