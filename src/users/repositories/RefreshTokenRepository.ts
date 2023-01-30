@@ -2,8 +2,9 @@ import { dataSource } from '@/shared/typeorm'
 import { Repository } from 'typeorm'
 import { RefreshToken } from '../database/entities/RefreshToken'
 import { CreateRefreshTokenDTO } from '../dtos/CreateRefreshTokenDTO'
+import { IRefreshTokenRepository } from './IRefreshTokenRepository'
 
-export class IRefreshTokenRepository implements IRefreshTokenRepository {
+export class RefreshTokenRepository implements IRefreshTokenRepository {
   private readonly repository: Repository<RefreshToken>
 
   constructor() {

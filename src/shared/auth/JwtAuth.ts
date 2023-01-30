@@ -2,16 +2,22 @@ import jwt from 'jsonwebtoken'
 import { AuthPayload, IAuth } from './IAuth'
 
 export class JwtAuth implements IAuth {
-  private key: string
-  private expiresIn: string
+  private accessTokenKey: string
+  private accessTokenExpiresIn: string
+  private refreshTokenKey: string
+  private refreshTokenExpiresIn: string
 
   constructor() {
-    this.key = process.env.AUTH_KEY
-    this.expiresIn = process.env.AUTH_EXPIRES_IN
+    this.accessTokenKey = process.env.ACCESS_KEY
+    this.accessTokenExpiresIn = process.env.ACCESS_EXPIRES_IN
   }
 
-  getToken(payload: object, options?: jwt.SignOptions): string {
-    return jwt.sign(payload, this.key, { expiresIn: this.expiresIn, ...options })
+  getAccessToken(payload: object, options?: jwt.SignOptions): string {
+    return jwt.sign(payload, this.accessTokenKey, { expiresIn: this.accessTokenExpiresIn, ...options })
+  }
+
+  getRefreshToken(payload: object, options?: jwt.SignOptions): string {
+    return jwt.sign(payload, this.refreshTokenKey, { expiresIn: this.refreshTokenExpiresIn, ...options })
   }
 
   decodeToken(token: string, options?: jwt.DecodeOptions): AuthPayload | null {

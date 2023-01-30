@@ -1,6 +1,6 @@
 export interface CreateRefreshTokenDTO {
   token: string
-  valid: boolean
+  valid?: boolean
   expires: Date
   userId: string
 }
