@@ -7,21 +7,15 @@ export class RefreshToken {
   id?: string
 
   @Column()
-  token: string
-
-  @Column({ default: true })
-  valid?: boolean
+  userId: string
 
   @Column()
-  expires: Date
+  token: string
 
   @Column()
   createdAt: Date
 
-  @Column()
-  userId: string
-
-  constructor(token: string, valid: boolean, expires: Date, userId: string) {
-    Object.assign(this, { token, valid, expires, userId, id: randomUUID(), createdAt: new Date() })
+  constructor(token: string, userId: string) {
+    Object.assign(this, { token, userId, id: randomUUID(), createdAt: new Date() })
   }
 }

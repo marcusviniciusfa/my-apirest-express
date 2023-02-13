@@ -3,7 +3,7 @@
   "info": {
     "title": "Swagger My API Express - OpenAPI 3.0",
     "version": "1.0.0",
-    "description": "This is a sample My API Express based on the OpenAPI 3.0 specification",
+    "description": "Documentation for My API Express based on the OpenAPI 3.0 specification",
     "contact": {
       "name": "Marcus Vinicius",
       "email": "marcusviniciusfa.dev@gmail.com"
@@ -634,57 +634,110 @@
           }
         },
         "responses": {
-          "200": {
+          "201": {
             "description": "Ok",
+            "headers": {
+              "Set-Cookies": {
+                "schema": {
+                  "type": "string",
+                  "example": "refresh-token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2NzYzMjYwMTQsImV4cCI6MTY3NjMyNjEzNCwiYXVkIjoidXJuOmNsaWVudDphdWRpZW5jZTpyZWZyZXNoIiwiaXNzIjoidXJuOm15LWFwaS1leHByZXNzOmlzc3VlcjpyZWZyZXNoIn0.t6yo7hVvTsNzE_wkngiiULd5PTCq39wTvxwyXcaa9SA; Expires=Mon, 13 Feb 2023 19:08:54 GMT; Path=/; Secure; HttpOnly; Domain=localhost"
+                }
+              }
+            },
             "content": {
               "application/json": {
                 "schema": {
                   "properties": {
-                    "user": {
-                      "type": "object",
-                      "properties": {
-                        "id": {
-                          "type": "string",
-                          "format": "uuid",
-                          "example": "847c4f08-ec9f-4b7f-b452-12d69d86efbe"
-                        },
-                        "name": {
-                          "type": "string",
-                          "example": "Jack"
-                        },
-                        "email": {
-                          "type": "string",
-                          "example": "jack@email.com"
-                        },
-                        "password": {
-                          "type": "string",
-                          "example": "12345678",
-                          "minLength": 8
-                        },
-                        "is_admin": {
-                          "type": "boolean",
-                          "example": false
-                        },
-                        "avatar_url": {
-                          "type": "string",
-                          "format": "url",
-                          "example": "http://localhost:3000/files/fd9a6444ba7b0a8f3ad1fff050edd669_avatar.jpeg"
-                        },
-                        "created_at": {
-                          "type": "string",
-                          "format": "date-time",
-                          "example": "1970-01-01T00:00:00.000Z"
-                        },
-                        "role_id": {
-                          "type": "string",
-                          "format": "uuid",
-                          "example": "847c4f08-ec9f-4b7f-b452-12d69d86efbe"
-                        }
-                      }
-                    },
-                    "token": {
+                    "accessToken": {
                       "type": "string",
-                      "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InVzZXIuYWRtaW5AZW1haWwuY29tIiwiaWF0IjoxNjc0Nzc0NzM1LCJleHAiOjE2NzQ4NjExMzUsInN1YiI6IjEwODcyOGFlLTgyNGQtNGY2MC05YzQzLWI1MzMxY2U5ODJlOSJ9.yPDgvdwWW1-Dl9rwQWZoXDlYuVW1_x0FjgINFKjjjPM"
+                      "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MWE4NTJhMi00NjBhLTQ2YWQtOWExMS1iYWNkMDM2ZmUwOTAiLCJpYXQiOjE2NzYzMjYwMTQsImV4cCI6MTY3NjMyNjA3NCwiYXVkIjoidXJuOmNsaWVudDphdWRpZW5jZTphY2Nlc3MiLCJpc3MiOiJ1cm46bXktYXBpLWV4cHJlc3M6aXNzdWVyOmFjY2VzcyJ9.VB4NUImV55EpO89pL44y2oqk8ApqtBmizEDLigt92zI"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "default": "error"
+                    },
+                    "message": {
+                      "type": "string",
+                      "default": "data/email must match pattern \"^[^@ \t\r\n]+@[^@ \t\r\n]+.[^@ \t\r\n]+$\" ❌"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "default": "error"
+                    },
+                    "message": {
+                      "type": "string",
+                      "default": "incorrect email/password combination 🔒"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "$ref": "#/components/responses/500GenericInternalServerError"
+          }
+        }
+      }
+    },
+    "/users/login/refresh": {
+      "post": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Update access token",
+        "description": "Checks if the refresh token is valid and returns a new access token",
+        "parameters": [
+          {
+            "in": "header",
+            "name": "Cookie",
+            "schema": {
+              "type": "string",
+                "example": "refresh-token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2NzYzMjYwMTQsImV4cCI6MTY3NjMyNjEzNCwiYXVkIjoidXJuOmNsaWVudDphdWRpZW5jZTpyZWZyZXNoIiwiaXNzIjoidXJuOm15LWFwaS1leHByZXNzOmlzc3VlcjpyZWZyZXNoIn0.t6yo7hVvTsNzE_wkngiiULd5PTCq39wTvxwyXcaa9SA; Expires=Mon, 13 Feb 2023 19:08:54 GMT; Path=/; Secure; HttpOnly; Domain=localhost"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "headers": {
+              "Set-Cookies": {
+                "schema": {
+                  "type": "string",
+                  "example": "refresh-token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2NzYzMjYwMTQsImV4cCI6MTY3NjMyNjEzNCwiYXVkIjoidXJuOmNsaWVudDphdWRpZW5jZTpyZWZyZXNoIiwiaXNzIjoidXJuOm15LWFwaS1leHByZXNzOmlzc3VlcjpyZWZyZXNoIn0.t6yo7hVvTsNzE_wkngiiULd5PTCq39wTvxwyXcaa9SA; Expires=Mon, 13 Feb 2023 19:08:54 GMT; Path=/; Secure; HttpOnly; Domain=localhost"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "accessToken": {
+                      "type": "string",
+                      "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MWE4NTJhMi00NjBhLTQ2YWQtOWExMS1iYWNkMDM2ZmUwOTAiLCJpYXQiOjE2NzYzMjYwMTQsImV4cCI6MTY3NjMyNjA3NCwiYXVkIjoidXJuOmNsaWVudDphdWRpZW5jZTphY2Nlc3MiLCJpc3MiOiJ1cm46bXktYXBpLWV4cHJlc3M6aXNzdWVyOmFjY2VzcyJ9.VB4NUImV55EpO89pL44y2oqk8ApqtBmizEDLigt92zI"
                     }
                   }
                 }

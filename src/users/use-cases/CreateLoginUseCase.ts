@@ -1,14 +1,13 @@
 import { jwtAuth } from '@/shared/auth/JwtAuth'
 import { Unauthorized } from '@/shared/errors/Unauthorized'
 import { nativeCrypto } from '@/shared/helpers/crypto/NativeCrypto'
+import { createHmac } from 'node:crypto'
 import { inject, injectable } from 'tsyringe'
-import { User } from '../database/entities/User'
 import { LoginDTO } from '../dtos/LoginDTO'
 import { IRefreshTokenRepository } from '../repositories/IRefreshTokenRepository'
 import { IUsersRepository } from '../repositories/IUsersRepository'
 
 export interface UserToken {
-  user: User
   accessToken: string
   refreshToken: string
 }
@@ -27,10 +26,10 @@ export class CreateLoginUseCase {
     if (!correctPassword) {
       throw new Unauthorized('incorrect email/password combination')
     }
-    const accessToken = jwtAuth.getAccessToken({ email }, { subject: user.id })
-    const expires = new Date(new Date().getTime() + Number(process.env.REFRESH_DURATION))
-    const refreshToken = jwtAuth.getRefreshToken({ email })
-    await this.refreshTokenRepository.create({ token: refreshToken, expires, userId: user.id })
-    return { user, accessToken, refreshToken }
+    const accessToken = jwtAuth.createAccessToken({ userId: user.id })
+    const refreshToken = jwtAuth.createRefreshToken()
+    const refreshTokenHash = createHmac('sha512', process.env.REFRESH_TOKEN_SECRET).update(refreshToken).digest('hex')
+    await this.refreshTokenRepository.save(refreshTokenHash, user.id)
+    return { accessToken, refreshToken }
   }
 }

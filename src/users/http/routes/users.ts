@@ -1,5 +1,6 @@
 import { uploadConfig } from '@/shared/config/upload'
-import { PATTERN } from '@/shared/constants'
+import { PATTERN } from '@/shared/constants/index'
+import { refreshTokenVerify } from '@/shared/http/middlewares/refreshTokenVerify'
 import { validator } from '@/shared/validator'
 import { IUsersController } from '@/users/controllers/IUsersController'
 import { Router } from 'express'
@@ -12,6 +13,7 @@ const createLoginController: IUsersController = container.resolve('CreateLoginCo
 const upInsertAvatarController: IUsersController = container.resolve('UpInsertAvatarController')
 const showProfileController: IUsersController = container.resolve('ShowProfileController')
 const updateProfileController: IUsersController = container.resolve('UpdateProfileController')
+const refreshTokenController: IUsersController = container.resolve('RefreshTokenController')
 
 const usersRouter = Router()
 
@@ -60,6 +62,19 @@ usersRouter.post('/login', (req, res) => {
     req.body,
   )
   return createLoginController.handler(req, res)
+})
+
+usersRouter.post('/login/refresh', refreshTokenVerify, (_req, res) => {
+  validator(
+    {
+      type: 'object',
+      properties: {
+        refreshTokenHash: { type: 'string' },
+      },
+    },
+    res.locals,
+  )
+  return refreshTokenController.handler(_req, res)
 })
 
 usersRouter.post('/profile', multer(uploadConfig).single('file'), (req, res) => {

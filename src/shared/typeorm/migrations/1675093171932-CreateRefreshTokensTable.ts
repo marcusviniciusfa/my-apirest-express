@@ -32,15 +32,6 @@ export class CreateRefreshTokensTable1675093171932 implements MigrationInterface
           isUnique: true,
         },
         {
-          name: 'valid',
-          type: 'boolean',
-          default: true,
-        },
-        {
-          name: 'expires',
-          type: 'timestamp',
-        },
-        {
           name: 'createdAt',
           type: 'timestamp',
           default: 'CURRENT_TIMESTAMP',

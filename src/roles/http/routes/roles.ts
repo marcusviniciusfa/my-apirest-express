@@ -1,5 +1,4 @@
 import { IRolesController } from '@/roles/controllers/IRolesController'
-import { PATTERN } from '@/shared/constants'
 import { validator } from '@/shared/validator'
 import { Router } from 'express'
 import { container } from 'tsyringe'

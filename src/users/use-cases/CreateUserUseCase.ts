@@ -22,7 +22,7 @@ export class CreateUserUseCase {
       throw new NotFoundError('role not found')
     }
     const encryptedPassword = nativeCrypto.encrypt(password)
-    const user = this.usersRepository.create({ name, email, isAdmin, password: encryptedPassword, roleId })
+    const user = this.usersRepository.create({ name, email, isAdmin, password: encryptedPassword, role })
     return user
   }
 }

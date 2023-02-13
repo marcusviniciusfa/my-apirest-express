@@ -8,14 +8,17 @@ export async function authentication(req: Request, _res: Response, next: NextFun
   if (!allowedRoutesPattern.test(req.path)) {
     const { authorization } = req.headers
     if (!authorization) {
-      throw new Unauthorized('failed to verify access token')
+      throw new Unauthorized('access token is not present')
     }
-    const token = authorization.replace('Bearer', '').trim()
-    const decodeToken = jwtAuth.decodeToken(token)
-    if (!decodeToken) {
-      throw new Unauthorized('unauthenticated user')
+    const [, token] = authorization.split(' ')
+    try {
+      jwtAuth.tokenValidator(token, process.env.ACCESS_TOKEN_SECRET, {
+        audience: process.env.ACCESS_TOKEN_AUDIENCE,
+        issuer: process.env.ACCESS_TOKEN_ISSUER,
+      })
+    } catch (error) {
+      next(new Unauthorized('unauthenticated user'))
     }
-    req.user = { id: decodeToken.subject }
   }
   next()
 }
