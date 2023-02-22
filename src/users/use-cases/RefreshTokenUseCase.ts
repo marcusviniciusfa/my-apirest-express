@@ -17,13 +17,14 @@ export class RefreshTokenUseCase {
   constructor(@inject('UsersRepository') private usersRepository: IUsersRepository, @inject('RefreshTokenRepository') private refreshTokenRepository: IRefreshTokenRepository) {}
 
   async execute({ refreshTokenHash }: RefreshTokenDTO): Promise<UserToken> {
-    const userId = await this.refreshTokenRepository.findUserByTokenHash(refreshTokenHash)
-    if (!userId) {
+    const oldRefreshToken = await this.refreshTokenRepository.findByTokenHash(refreshTokenHash)
+    if (!oldRefreshToken) {
       throw new Unauthorized('unauthenticated user')
     }
+    const { userId } = oldRefreshToken
     const user = await this.usersRepository.findById(userId)
     if (!user) {
-      throw new NotFoundError('user is not found')
+      throw new NotFoundError('user not found')
     }
     const accessToken = jwtAuth.createAccessToken({ userId })
     const refreshToken = jwtAuth.createRefreshToken()

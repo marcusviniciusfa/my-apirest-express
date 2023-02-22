@@ -12,11 +12,11 @@ export class RefreshTokenRepository implements IRefreshTokenRepository {
 
   async save(tokenHash: string, userId: string): Promise<void> {
     const refreshToken = this.repository.create(new RefreshToken(tokenHash, userId))
+    await this.repository.createQueryBuilder().delete().where('userId = :userId', { userId }).execute()
     this.repository.save(refreshToken)
   }
 
-  async findUserByTokenHash(token: string): Promise<string> {
-    const refreshToken = await this.repository.findOneBy({ token })
-    return refreshToken.userId
+  async findByTokenHash(tokenHash: string): Promise<RefreshToken> {
+    return this.repository.findOneBy({ tokenHash })
   }
 }

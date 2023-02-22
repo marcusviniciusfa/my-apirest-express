@@ -7,13 +7,14 @@ import { SeederOptions } from 'typeorm-extension'
 import { CreateRolesTable1668986011952 } from './migrations/1668986011952-CreateRolesTable'
 import { CreateUsersTable1673312143744 } from './migrations/1673312143744-CreateUsersTable'
 import { AddRoleIdToUsersTable1673313376233 } from './migrations/1673313376233-AddRoleIdToUsersTable'
-import { CreateRefreshTokensTable1675093171932 } from './migrations/1675093171932-CreateRefreshTokensTable'
+import { CreateRefreshTokensTable1676409671704 } from './migrations/1676409671704-CreateRefreshTokensTable'
+import { AddUserIdToRefreshTokensTable1676413389897 } from './migrations/1676413389897-AddUserIdToRefreshTokensTable'
 
 const options: DataSourceOptions & SeederOptions = {
   type: 'sqlite',
   database: './db.sqlite',
   entities: [Role, User, RefreshToken],
-  migrations: [CreateRolesTable1668986011952, CreateUsersTable1673312143744, AddRoleIdToUsersTable1673313376233, CreateRefreshTokensTable1675093171932],
+  migrations: [CreateRolesTable1668986011952, CreateUsersTable1673312143744, AddRoleIdToUsersTable1673313376233, CreateRefreshTokensTable1676409671704, AddUserIdToRefreshTokensTable1676413389897],
   seeds: [UserSeeder],
 }
 

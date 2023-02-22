@@ -2,23 +2,26 @@ import jwt, { JwtPayload } from 'jsonwebtoken'
 import { AuthPayload, IAuth } from './IAuth'
 
 export class JwtAuth implements IAuth {
+  // Token de acesso
   private readonly accessTokenSecret: string
   private readonly accessTokenDuration: string
   private readonly accessTokenAudience: string
-  private readonly refreshTokenIssuer: string
+  private readonly accessTokenIssuer: string
+
+  // Token de atualização
   private readonly refreshTokenSecret: string
   private readonly refreshTokenDuration: string
   private readonly refreshTokenAudience: string
-  private readonly accessTokenIssuer: string
+  private readonly refreshTokenIssuer: string
 
   constructor() {
-    // Access token
+    // Token de acesso
     this.accessTokenSecret = process.env.ACCESS_TOKEN_SECRET
     this.accessTokenDuration = `${process.env.ACCESS_TOKEN_DURATION_IN_MINUTES}m`
     this.accessTokenAudience = process.env.ACCESS_TOKEN_AUDIENCE
     this.accessTokenIssuer = process.env.ACCESS_TOKEN_ISSUER
 
-    //Refresh token
+    // Token de atualização
     this.refreshTokenSecret = process.env.REFRESH_TOKEN_SECRET
     this.refreshTokenDuration = `${process.env.REFRESH_TOKEN_DURATION_IN_MINUTES}m`
     this.refreshTokenAudience = process.env.REFRESH_TOKEN_AUDIENCE
@@ -32,7 +35,6 @@ export class JwtAuth implements IAuth {
       issuer: this.accessTokenIssuer,
       ...options,
     })
-
     return token
   }
 
@@ -43,7 +45,6 @@ export class JwtAuth implements IAuth {
       issuer: this.refreshTokenIssuer,
       ...options,
     })
-
     return token
   }
 

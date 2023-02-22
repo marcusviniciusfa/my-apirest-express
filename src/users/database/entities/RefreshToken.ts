@@ -7,15 +7,15 @@ export class RefreshToken {
   id?: string
 
   @Column()
-  userId: string
+  tokenHash: string
 
   @Column()
-  token: string
+  userId: string
 
   @Column()
   createdAt: Date
 
-  constructor(token: string, userId: string) {
-    Object.assign(this, { token, userId, id: randomUUID(), createdAt: new Date() })
+  constructor(tokenHash: string, userId: string) {
+    Object.assign(this, { tokenHash, userId, id: randomUUID(), createdAt: new Date() })
   }
 }

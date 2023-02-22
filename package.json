@@ -1,7 +1,7 @@
 {
   "name": "my-api-express",
   "version": "1.0.0",
-  "description": "Back-End application with ExpressJS, to register users and roles",
+  "description": "API example using the Express framework",
   "repository": {
     "type": "git",
     "url": "https://github.com/marcusviniciusfa/my-api-express"
