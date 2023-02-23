@@ -2,7 +2,7 @@ import { jwtAuth } from '@/shared/auth/JwtAuth'
 import { Unauthorized } from '@/shared/errors/Unauthorized'
 import { NextFunction, Request, Response } from 'express'
 
-export async function authentication(req: Request, _res: Response, next: NextFunction) {
+export async function authenticationHandler(req: Request, _res: Response, next: NextFunction) {
   const allowedRoutesByDefault = ['/docs', '/login', '/files']
   const allowedRoutesPattern = new RegExp(allowedRoutesByDefault.join('|'), 'g')
   if (!allowedRoutesPattern.test(req.path)) {

@@ -1,4 +1,5 @@
 import { IRolesController } from '@/roles/controllers/IRolesController'
+import { PATTERN } from '@/shared/constants/index'
 import { validator } from '@/shared/validator'
 import { Router } from 'express'
 import { container } from 'tsyringe'
@@ -62,10 +63,7 @@ rolesRouter.put('/:id', (req, res) => {
       },
       required: ['name'],
     },
-    {
-      ...req.params,
-      ...req.body,
-    },
+    { ...req.params, ...req.body },
   )
   return updateRoleController.handler(req, res)
 })

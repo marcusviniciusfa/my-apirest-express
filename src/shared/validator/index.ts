@@ -1,6 +1,6 @@
 import { BadRequestError } from '@/shared/errors/BadRequestError'
 import Ajv from 'ajv'
-const ajv = new Ajv({ messages: true })
+const ajv = new Ajv({ allErrors: true, messages: true })
 
 export const validator = (schema: object, data: object) => {
   const validate = ajv.compile(schema)

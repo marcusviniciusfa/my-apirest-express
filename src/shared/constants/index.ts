@@ -14,3 +14,8 @@ export enum FILE {
 export enum MILLISECOND {
   ONE_MINUTE = 60 * 1000
 }
+
+export enum LANGUAGE {
+  EN = 'en',
+  PT_BR = 'pt-BR',
+}
