@@ -1,7 +1,7 @@
 import { IRolesController } from '@/roles/controllers/IRolesController'
-import { PATTERN } from '@/shared/constants/index'
-import { validator } from '@/shared/validator'
+import { validatorHandler } from '@/shared/http/middlewares/validatorHandler'
 import { Router } from 'express'
+import { body, param, query } from 'express-validator'
 import { container } from 'tsyringe'
 
 const createRoleController: IRolesController = container.resolve('CreateRoleController')
@@ -12,73 +12,14 @@ const updateRoleController: IRolesController = container.resolve('UpdateRoleCont
 
 const rolesRouter = Router()
 
-rolesRouter.post('/', (req, res) => {
-  validator(
-    {
-      type: 'object',
-      properties: {
-        name: { type: 'string' },
-      },
-      required: ['name'],
-    },
-    req.body,
-  )
-  return createRoleController.handler(req, res)
-})
+rolesRouter.post('/', body('name').isString().notEmpty(), validatorHandler, (req, res) => createRoleController.handler(req, res))
 
-rolesRouter.get('/', (req, res) => {
-  validator(
-    {
-      type: 'object',
-      properties: {
-        page: { type: 'string', pattern: PATTERN.POSITIVE_NUMBER },
-        limit: { type: 'string', pattern: PATTERN.POSITIVE_NUMBER },
-      },
-    },
-    req.query,
-  )
-  return listRolesController.handler(req, res)
-})
+rolesRouter.get('/', query('page').isInt(), query('limit').isInt(), validatorHandler, (req, res) => listRolesController.handler(req, res))
 
-rolesRouter.get('/:id', (req, res) => {
-  validator(
-    {
-      type: 'object',
-      properties: {
-        id: { type: 'string', pattern: PATTERN.UUID },
-      },
-    },
-    req.params,
-  )
-  return showRoleController.handler(req, res)
-})
+rolesRouter.get('/:id', param('id').isString().isUUID('4'), validatorHandler, (req, res) => showRoleController.handler(req, res))
 
-rolesRouter.put('/:id', (req, res) => {
-  validator(
-    {
-      type: 'object',
-      properties: {
-        id: { type: 'string', pattern: PATTERN.UUID },
-        name: { type: 'string' },
-      },
-      required: ['name'],
-    },
-    { ...req.params, ...req.body },
-  )
-  return updateRoleController.handler(req, res)
-})
+rolesRouter.put('/:id', param('id').isString().isUUID('4'), body('name').isString().notEmpty(), validatorHandler, (req, res) => updateRoleController.handler(req, res))
 
-rolesRouter.delete('/:id', (req, res) => {
-  validator(
-    {
-      type: 'object',
-      properties: {
-        id: { type: 'string', pattern: PATTERN.UUID },
-      },
-    },
-    req.params,
-  )
-  return deleteRoleController.handler(req, res)
-})
+rolesRouter.delete('/:id', param('id').isString().isUUID('4'), validatorHandler, (req, res) => deleteRoleController.handler(req, res))
 
 export { rolesRouter }

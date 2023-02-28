@@ -1,11 +1,13 @@
 import { uploadConfig } from '@/shared/config/upload'
-import { PATTERN } from '@/shared/constants/index'
-import { refreshTokenVerify } from '@/shared/http/middlewares/refreshTokenVerify'
-import { validator } from '@/shared/validator'
+import { refreshTokenHandler } from '@/shared/http/middlewares/refreshTokenHandler'
+import { validatorHandler } from '@/shared/http/middlewares/validatorHandler'
 import { IUsersController } from '@/users/controllers/IUsersController'
 import { Router } from 'express'
+import { body, param, query } from 'express-validator'
+import i18next from 'i18next'
 import multer from 'multer'
 import { container } from 'tsyringe'
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 
 const createUserController: IUsersController = container.resolve('CreateUserController')
 const listUsersController: IUsersController = container.resolve('ListUsersController')
@@ -17,107 +19,40 @@ const refreshTokenController: IUsersController = container.resolve('RefreshToken
 
 const usersRouter = Router()
 
-usersRouter.post('/', (req, res) => {
-  validator(
-    {
-      type: 'object',
-      properties: {
-        name: { type: 'string' },
-        email: { type: 'string', pattern: PATTERN.EMAIL },
-        password: { type: 'string', pattern: PATTERN.PASSWORD },
-        is_admin: { type: 'boolean' },
-        roleId: { type: 'string', pattern: PATTERN.UUID },
-      },
-      required: ['name', 'email', 'password', 'is_admin', 'role_id'],
-    },
-    req.body,
-  )
-  return createUserController.handler(req, res)
-})
+usersRouter.post(
+  '/',
+  body('name').isString().notEmpty(),
+  body('email').isEmail().notEmpty(),
+  body('password').isLength({ min: 8, max: 16 }).notEmpty(),
+  body('is_admin').isBoolean().notEmpty(),
+  body('role_id').isString().isUUID('4').notEmpty(),
+  validatorHandler,
+  (req, res) => {
+    const message = i18next.t('test-message', { test: 'ok' })
+    res.send(message)
+  },
+  // (req, res) => createUserController.handler(req, res),
+)
 
-usersRouter.get('/', (req, res) => {
-  validator(
-    {
-      type: 'object',
-      properties: {
-        page: { type: 'string', pattern: PATTERN.POSITIVE_NUMBER },
-        limit: { type: 'string', pattern: PATTERN.POSITIVE_NUMBER },
-      },
-    },
-    req.query,
-  )
-  return listUsersController.handler(req, res)
-})
+usersRouter.get('/', query('page').isInt(), query('limit').isInt(), validatorHandler, (req, res) => listUsersController.handler(req, res))
 
-usersRouter.post('/login', (req, res) => {
-  validator(
-    {
-      type: 'object',
-      properties: {
-        email: { type: 'string', pattern: PATTERN.EMAIL },
-        password: { type: 'string', pattern: PATTERN.PASSWORD },
-      },
-      required: ['email', 'password'],
-    },
-    req.body,
-  )
-  return createLoginController.handler(req, res)
-})
+usersRouter.post('/login', body('email').isEmail().notEmpty(), body('password').isLength({ min: 8, max: 16 }).notEmpty(), validatorHandler, (req, res) => createLoginController.handler(req, res))
 
-usersRouter.post('/login/refresh', refreshTokenVerify, (_req, res) => {
-  validator(
-    {
-      type: 'object',
-      properties: {
-        refreshTokenHash: { type: 'string' },
-      },
-    },
-    res.locals,
-  )
-  return refreshTokenController.handler(_req, res)
-})
+usersRouter.post('/login/refresh', refreshTokenHandler, validatorHandler, (_req, res) => refreshTokenController.handler(_req, res))
 
-usersRouter.post('/profile', multer(uploadConfig).single('file'), (req, res) => {
-  validator(
-    {
-      type: 'object',
-      required: ['file'],
-    },
-    req,
-  )
-  return upInsertAvatarController.handler(req, res)
-})
+usersRouter.post('/profile', multer(uploadConfig).single('file'), (req, res) => upInsertAvatarController.handler(req, res))
 
-usersRouter.get('/profile/:id', (req, res) => {
-  validator(
-    {
-      type: 'object',
-      properties: {
-        id: { type: 'string', pattern: PATTERN.UUID },
-      },
-      required: ['id'],
-    },
-    req.params,
-  )
-  return showProfileController.handler(req, res)
-})
+usersRouter.get('/profile/:id', param('id').isString().isUUID('4'), validatorHandler, (req, res) => showProfileController.handler(req, res))
 
-usersRouter.put('/profile/:id', (req, res) => {
-  validator(
-    {
-      type: 'object',
-      properties: {
-        id: { type: 'string', pattern: PATTERN.UUID },
-        name: { type: 'string' },
-        email: { type: 'string', pattern: PATTERN.EMAIL },
-        old_password: { type: 'string', pattern: PATTERN.PASSWORD },
-        new_password: { type: 'string', pattern: PATTERN.PASSWORD },
-      },
-      required: ['id', 'name', 'email', 'old_password'],
-    },
-    { ...req.body, ...req.params },
-  )
-  return updateProfileController.handler(req, res)
-})
+usersRouter.put(
+  '/profile/:id',
+  param('id').isString().isUUID('4'),
+  body('name').isString().notEmpty(),
+  body('email').isEmail().notEmpty(),
+  body('old_password').isLength({ min: 8, max: 16 }).notEmpty(),
+  body('new_password').isLength({ min: 8, max: 16 }),
+  validatorHandler,
+  (req, res) => updateProfileController.handler(req, res),
+)
 
 export { usersRouter }

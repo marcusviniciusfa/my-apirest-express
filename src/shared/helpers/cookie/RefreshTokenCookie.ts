@@ -1,6 +1,6 @@
 import { MILLISECOND } from '@/shared/constants/index'
+import { helpDate } from '@/shared/helpers/date/HelpDate'
 import { Response } from 'express'
-import { helpDate } from '../date/HelpDate'
 
 class RefreshTokenCookie {
   private readonly keyToken: string

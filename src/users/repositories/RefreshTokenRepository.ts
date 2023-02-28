@@ -1,6 +1,6 @@
-import { dataSource } from '@/shared/typeorm'
+import { dataSource } from '@/shared/typeorm/index'
+import { RefreshToken } from '@/users/database/entities/RefreshToken'
 import { Repository } from 'typeorm'
-import { RefreshToken } from '../database/entities/RefreshToken'
 import { IRefreshTokenRepository } from './IRefreshTokenRepository'
 
 export class RefreshTokenRepository implements IRefreshTokenRepository {

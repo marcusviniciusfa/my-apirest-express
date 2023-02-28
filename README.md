@@ -45,10 +45,11 @@ Exemplo de API utilizando o framework Express, construída com base no curso [In
 - [x] Middleware de tratamento de erros personalizado
 - [x] Seeds para popular uma tabela do banco de dados utilizando o módulo [typeorm-extension](https://typeorm-extension.tada5hi.net/guide/seeding.html), recomendado pelo [TypeORM](https://typeorm.io/#extensions)
 - [x] Implementação de access token e refresh token seguindo o artigo ["Usando Tokens JWT de forma Segura"](https://blog.lsantos.dev/jwt-seguro/), escrito por Lucas Santos
-- [ ] Tradução de mensagens de erro com [i18n](https://www.i18next.com/)
-- [ ] Salvar Refresh Token em banco de dados [Redis](https://redis.io/) (para ter um melhor desempenho ao invalidar Refresh Tokens antigos)
+- [x] Tradução de mensagens de erro com [i18n](https://www.i18next.com/)
 - [ ] Testes unitários e end-to-end com [Jest](https://jestjs.io/pt-BR/)
+- [ ] Salvar Refresh Token em banco de dados [Redis](https://redis.io/) (para ter um melhor desempenho ao invalidar Refresh Tokens antigos)
 - [ ] Salvar avatar no [Simple Storage Service (S3) da AWS](https://aws.amazon.com/pt/s3/)
+- [ ] NodeJS para produção
 
 ## Anotações
 

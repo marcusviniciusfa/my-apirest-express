@@ -1,5 +1,5 @@
+import { Role } from '@/roles/database/entities/Role'
 import { ShowRoleDTO } from '@/roles/dtos/ShowRoleDTO'
-import { Role } from '../../database/entities/Role'
 
 class RoleViewModel {
   toHttp(role: Role): ShowRoleDTO {

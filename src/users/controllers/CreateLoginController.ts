@@ -1,7 +1,7 @@
 import { refreshTokenCookie } from '@/shared/helpers/cookie/RefreshTokenCookie'
+import { CreateLoginUseCase } from '@/users/use-cases/CreateLoginUseCase'
 import { Request, Response } from 'express'
 import { container } from 'tsyringe'
-import { CreateLoginUseCase } from '../use-cases/CreateLoginUseCase'
 import { IUsersController } from './IUsersController'
 
 export class CreateLoginController implements IUsersController {

@@ -4,7 +4,7 @@ import { IExtendedResponse } from '@/shared/interfaces/IExtendedResponse'
 import { NextFunction, Request } from 'express'
 import { createHmac } from 'node:crypto'
 
-export async function refreshTokenVerify(req: Request, res: IExtendedResponse, next: NextFunction) {
+export async function refreshTokenHandler(req: Request, res: IExtendedResponse, next: NextFunction) {
   const { 'refresh-token': refreshToken } = req.cookies
   if (!refreshToken) {
     throw new Unauthorized('refresh token is not present')

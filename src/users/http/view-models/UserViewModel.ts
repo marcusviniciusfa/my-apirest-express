@@ -1,5 +1,5 @@
+import { User } from '@/users/database/entities/User'
 import { ShowProfileDTO } from '@/users/dtos/ShowProfileDTO'
-import { User } from '../../database/entities/User'
 
 class UserViewModel {
   toHttp(user: User): ShowProfileDTO {

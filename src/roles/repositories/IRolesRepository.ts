@@ -1,5 +1,5 @@
 import { Role } from '@/roles/database/entities/Role'
-import { CreateRoleDTO } from '../dtos/CreateRoleDTO'
+import { CreateRoleDTO } from '@/roles/dtos/CreateRoleDTO'
 
 export interface RolesPaginateParams {
   page: number

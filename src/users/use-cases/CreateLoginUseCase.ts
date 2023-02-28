@@ -26,7 +26,7 @@ export class CreateLoginUseCase {
     if (!correctPassword) {
       throw new Unauthorized('incorrect email/password combination')
     }
-    const accessToken = jwtAuth.createAccessToken({ userId: user.id })
+    const accessToken = jwtAuth.createAccessToken({}, { subject: user.id })
     const refreshToken = jwtAuth.createRefreshToken()
     const refreshTokenHash = createHmac('sha512', process.env.REFRESH_TOKEN_SECRET).update(refreshToken).digest('hex')
     await this.refreshTokenRepository.save(refreshTokenHash, user.id)

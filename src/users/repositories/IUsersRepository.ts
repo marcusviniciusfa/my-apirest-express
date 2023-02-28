@@ -1,6 +1,6 @@
 import { Role } from '@/roles/database/entities/Role'
-import { User } from '../database/entities/User'
-import { CreateUserDTO } from '../dtos/CreateUserDTO'
+import { User } from '@/users/database/entities/User'
+import { CreateUserDTO } from '@/users/dtos/CreateUserDTO'
 
 export interface UsersPaginateParams {
   page: number

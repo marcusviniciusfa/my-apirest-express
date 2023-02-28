@@ -1,7 +1,7 @@
+import { roleViewModel } from '@/roles/http/view-models/RoleViewModel'
 import { ListRolesUseCase } from '@/roles/use-cases/ListRolesUseCase'
 import { Request, Response } from 'express'
 import { container } from 'tsyringe'
-import { roleViewModel } from '../http/view-models/RoleViewModel'
 import { IRolesController } from './IRolesController'
 
 const DEFAULT_PAGE = 1

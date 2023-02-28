@@ -1,5 +1,5 @@
 export interface AuthPayload {
-  [key: string]: string
+  subject: string
 }
 
 export interface IAuth {

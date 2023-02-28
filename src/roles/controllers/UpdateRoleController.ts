@@ -1,7 +1,7 @@
+import { roleViewModel } from '@/roles/http/view-models/RoleViewModel'
 import { UpdateRoleUseCase } from '@/roles/use-cases/UpdateRoleUseCase'
 import { Request, Response } from 'express'
 import { container } from 'tsyringe'
-import { roleViewModel } from '../http/view-models/RoleViewModel'
 import { IRolesController } from './IRolesController'
 
 export class UpdateRoleController implements IRolesController {
