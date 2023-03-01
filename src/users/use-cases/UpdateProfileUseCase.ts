@@ -14,19 +14,19 @@ export class UpdateProfileUseCase {
   async execute({ id, name, email, newPassword, oldPassword }: UpdateUserDTO): Promise<User> {
     const user = await this.usersRepository.findById(id)
     if (!user) {
-      throw new NotFoundError('user not found')
+      throw new NotFoundError('user-not-found')
     }
     const emailAlreadyExists = await this.usersRepository.findByEmail(email)
     if (emailAlreadyExists && user.id !== id) {
-      throw new BadRequestError(`there is already one user with this email`)
+      throw new BadRequestError('email-already-exists')
     }
     if (newPassword) {
       if (!oldPassword) {
-        throw new BadRequestError(`old password is needed to reset a new one`)
+        throw new BadRequestError('old-password-is-needed')
       }
       const oldPasswordIsValid = nativeCrypto.compare(oldPassword, user.password)
       if (!oldPasswordIsValid) {
-        throw new BadRequestError(`old password does not match`)
+        throw new BadRequestError('old-password-does-not-match')
       }
       user.password = nativeCrypto.encrypt(newPassword)
     }

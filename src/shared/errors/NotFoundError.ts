@@ -1,8 +1,10 @@
-export class NotFoundError extends Error {
-  readonly statusCode: number
+import { AppError, ErrorMessageInterpolation } from './AppError'
 
-  constructor(message: string) {
-    super(message.concat(' 🔎'))
+export class NotFoundError extends AppError {
+  constructor(message: string, interpolation: ErrorMessageInterpolation = {}) {
+    super(message)
     this.statusCode = 404
+    this.emoji = '🔎'
+    this.interpolation = interpolation
   }
 }

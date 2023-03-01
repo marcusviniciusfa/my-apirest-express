@@ -1,0 +1,22 @@
+{
+  "user-already-exists": "user already exists",
+  "user-not-found": "user not found",
+  "role-already-exists": "role already exists",
+  "role-not-found": "role not found",
+  "incorrect-combination": "incorrect email/password combination",
+  "unauthenticated-user": "unauthenticated user",
+  "access-token-is-not-present": "access token is not present",
+  "refresh-token-is-not-present": "refresh token is not present",
+  "email-already-exists": "there is already one user with this email",
+  "old-password-is-needed": "old password is needed to reset a new one",
+  "old-password-does-not-match": "old password does not match",
+  "requested-path-not-found": "requested path \"{{path}}\" not found",
+  "internal-server-error": "internal server error",
+  "property-must-be-a-string": "\"{{property}}\" property must be a string",
+  "property-must-be-a-int": "\"{{property}}\" property must be a int",
+  "property-must-be-uuid-v4": "\"{{property}}\" property must be in standard UUID v4",
+  "property-must-be-a-email": "\"{{property}}\" property must be a email",
+  "property-must-be-a-boolean": "\"{{property}}\" property must be a boolean",
+  "property-must-be-a-length-limit": "\"{{property}}\" property must be between 8 and 16 characters in length",
+  "property-is-required": "\"{{property}}\" property is required"
+}

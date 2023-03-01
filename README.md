@@ -41,11 +41,12 @@ Exemplo de API utilizando o framework Express, construída com base no curso [In
 
 ## Tópicos extras (complemento ao curso)
 
-- [x] Validação dos dados recebidos pela API usando o [Ajv JSON schema validator](https://ajv.js.org/)
+- [x] Validação dos dados recebidos pela API usando o [express-validator](https://express-validator.github.io/docs)
 - [x] Middleware de tratamento de erros personalizado
-- [x] Seeds para popular uma tabela do banco de dados utilizando o módulo [typeorm-extension](https://typeorm-extension.tada5hi.net/guide/seeding.html), recomendado pelo [TypeORM](https://typeorm.io/#extensions)
+- [x] Seeds para popular uma tabela do banco de dados utilizando o módulo [typeorm-extension](https://typeorm-extension.tada5hi.net/guide/seeding.html) (recomendado pelo [TypeORM](https://typeorm.io/#extensions))
 - [x] Implementação de access token e refresh token seguindo o artigo ["Usando Tokens JWT de forma Segura"](https://blog.lsantos.dev/jwt-seguro/), escrito por Lucas Santos
 - [x] Tradução de mensagens de erro com [i18n](https://www.i18next.com/)
+- [ ] Tradução da documentação Swagger
 - [ ] Testes unitários e end-to-end com [Jest](https://jestjs.io/pt-BR/)
 - [ ] Salvar Refresh Token em banco de dados [Redis](https://redis.io/) (para ter um melhor desempenho ao invalidar Refresh Tokens antigos)
 - [ ] Salvar avatar no [Simple Storage Service (S3) da AWS](https://aws.amazon.com/pt/s3/)

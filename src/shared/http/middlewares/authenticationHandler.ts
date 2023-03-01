@@ -8,7 +8,7 @@ export async function authenticationHandler(req: Request, res: Response, next: N
   if (!allowedRoutesPattern.test(req.path)) {
     const { authorization } = req.headers
     if (!authorization) {
-      throw new Unauthorized('access token is not present')
+      throw new Unauthorized('access-token-is-not-present')
     }
     const [, token] = authorization.split(' ')
     try {
@@ -18,7 +18,7 @@ export async function authenticationHandler(req: Request, res: Response, next: N
       })
       res.locals = { user: { id: decodedToken.subject } }
     } catch (error) {
-      next(new Unauthorized('unauthenticated user'))
+      next(new Unauthorized('unauthenticated-user'))
     }
   }
   next()

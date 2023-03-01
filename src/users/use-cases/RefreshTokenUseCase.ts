@@ -19,12 +19,12 @@ export class RefreshTokenUseCase {
   async execute({ refreshTokenHash }: RefreshTokenDTO): Promise<UserToken> {
     const oldRefreshToken = await this.refreshTokenRepository.findByTokenHash(refreshTokenHash)
     if (!oldRefreshToken) {
-      throw new Unauthorized('unauthenticated user')
+      throw new Unauthorized('unauthenticated-user')
     }
     const { userId } = oldRefreshToken
     const user = await this.usersRepository.findById(userId)
     if (!user) {
-      throw new NotFoundError('user not found')
+      throw new NotFoundError('user-not-found')
     }
     const accessToken = jwtAuth.createAccessToken({ userId })
     const refreshToken = jwtAuth.createRefreshToken()

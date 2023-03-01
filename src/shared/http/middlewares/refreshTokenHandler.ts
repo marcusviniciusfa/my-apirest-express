@@ -7,7 +7,7 @@ import { createHmac } from 'node:crypto'
 export async function refreshTokenHandler(req: Request, res: IExtendedResponse, next: NextFunction) {
   const { 'refresh-token': refreshToken } = req.cookies
   if (!refreshToken) {
-    throw new Unauthorized('refresh token is not present')
+    throw new Unauthorized('refresh-token-is-not-present')
   }
   try {
     jwtAuth.tokenValidator(refreshToken, process.env.REFRESH_TOKEN_SECRET, {
@@ -17,7 +17,7 @@ export async function refreshTokenHandler(req: Request, res: IExtendedResponse, 
     const refreshTokenHash = createHmac('sha512', process.env.REFRESH_TOKEN_SECRET).update(refreshToken).digest('hex')
     res.locals = { refreshTokenHash }
   } catch (error) {
-    next(new Unauthorized('unauthenticated user'))
+    next(new Unauthorized('unauthenticated-user'))
   }
   next()
 }

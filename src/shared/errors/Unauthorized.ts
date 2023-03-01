@@ -1,8 +1,10 @@
-export class Unauthorized extends Error {
-  readonly statusCode: number
+import { AppError, ErrorMessageInterpolation } from './AppError'
 
-  constructor(message: string) {
-    super(message.concat(' 🔒'))
+export class Unauthorized extends AppError {
+  constructor(message: string, interpolation: ErrorMessageInterpolation = {}) {
+    super(message)
     this.statusCode = 401
+    this.emoji = '🔒'
+    this.interpolation = interpolation
   }
 }

@@ -14,7 +14,7 @@ export class ShowRoleUseCase {
   async execute({ id }: ShowRoleParams): Promise<Role> {
     const role = await this.rolesRepository.findById(id)
     if (!role) {
-      throw new NotFoundError('role not found')
+      throw new NotFoundError('role-not-found')
     }
     return role
   }

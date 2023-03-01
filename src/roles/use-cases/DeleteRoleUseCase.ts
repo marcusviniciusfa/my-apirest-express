@@ -13,7 +13,7 @@ export class DeleteRoleUseCase {
   async execute({ id }: DeleteRoleParams): Promise<void> {
     const role = await this.rolesRepository.findById(id)
     if (!role) {
-      throw new NotFoundError('role not found')
+      throw new NotFoundError('role-not-found')
     }
     this.rolesRepository.delete(role)
   }

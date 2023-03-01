@@ -1,12 +1,12 @@
 import { IRolesRepository } from '@/roles/repositories/IRolesRepository'
 import { uploadConfig } from '@/shared/config/upload'
 import { NotFoundError } from '@/shared/errors/NotFoundError'
+import { IUsersRepository } from '@/users/repositories/IUsersRepository'
 import asyncFileSystem from 'node:fs/promises'
 import path from 'node:path'
 import { inject, injectable } from 'tsyringe'
 import { User } from '../database/entities/User'
 import { UpInsertAvatarDTO } from '../dtos/UpInsertAvatarDTO'
-import { IUsersRepository } from '../repositories/IUsersRepository'
 
 @injectable()
 export class UpInsertAvatarUseCase {
@@ -15,7 +15,7 @@ export class UpInsertAvatarUseCase {
   async execute({ id, avatar }: UpInsertAvatarDTO): Promise<User> {
     const user = await this.usersRepository.findById(id)
     if (!user) {
-      throw new NotFoundError('user not found')
+      throw new NotFoundError('user-not-found')
     }
 
     if (user.avatar) {

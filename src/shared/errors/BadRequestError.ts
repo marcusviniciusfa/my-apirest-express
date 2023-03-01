@@ -1,8 +1,10 @@
-export class BadRequestError extends Error {
-  readonly statusCode: number
+import { AppError, ErrorMessageInterpolation } from './AppError'
 
-  constructor(message: string) {
-    super(message.concat(' ❌'))
+export class BadRequestError extends AppError {
+  constructor(message: string, interpolation: ErrorMessageInterpolation = {}) {
+    super(message)
     this.statusCode = 400
+    this.emoji = '❌'
+    this.interpolation = interpolation
   }
 }

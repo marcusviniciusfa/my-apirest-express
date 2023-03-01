@@ -20,11 +20,11 @@ export class CreateLoginUseCase {
     const user = await this.usersRepository.findByEmail(email)
     if (!user) {
       // não explicativo para confundir usuários maliciosos
-      throw new Unauthorized('incorrect email/password combination')
+      throw new Unauthorized('incorrect-combination')
     }
     const correctPassword = nativeCrypto.compare(password, user.password)
     if (!correctPassword) {
-      throw new Unauthorized('incorrect email/password combination')
+      throw new Unauthorized('incorrect-combination')
     }
     const accessToken = jwtAuth.createAccessToken({}, { subject: user.id })
     const refreshToken = jwtAuth.createRefreshToken()

@@ -6,7 +6,7 @@ export async function validatorHandler(req: Request, _res: Response, next: NextF
   const errors = validationResult(req)
   if (!errors.isEmpty()) {
     const [error] = errors.array({ onlyFirstError: true })
-    throw new BadRequestError(error.msg)
+    throw new BadRequestError(error.msg, { property: `${error.location}/${error.param}` })
   }
   next()
 }

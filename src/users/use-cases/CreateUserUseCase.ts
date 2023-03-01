@@ -15,11 +15,11 @@ export class CreateUserUseCase {
   async execute({ name, email, isAdmin, password, roleId }: CreateUserDTO): Promise<User> {
     const userAlreadyExixts = await this.usersRepository.findByEmail(email)
     if (userAlreadyExixts) {
-      throw new BadRequestError('user already exists')
+      throw new BadRequestError('user-already-exists')
     }
     const role: Role = await this.rolesRepository.findById(roleId)
     if (!role) {
-      throw new NotFoundError('role not found')
+      throw new NotFoundError('role-not-found')
     }
     const encryptedPassword = nativeCrypto.encrypt(password)
     const user = this.usersRepository.create({ name, email, isAdmin, password: encryptedPassword, role })

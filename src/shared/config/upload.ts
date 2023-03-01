@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-namespace */
 import multer, { Options, StorageEngine } from 'multer'
 import crypto from 'node:crypto'
 import path from 'node:path'

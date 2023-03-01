@@ -1,0 +1,22 @@
+{
+  "user-already-exists": "usuário já existe",
+  "user-not-found": "usuário não encontrado",
+  "role-already-exists": "função já existe",
+  "role-not-found": "função não encontrada",
+  "incorrect-combination": "combinação incorreta de email/senha",
+  "unauthenticated-user": "usuário não autenticado",
+  "access-token-is-not-present": "token de acesso não está presente",
+  "refresh-token-is-not-present": "token de atualização não está presente",
+  "email-already-exists": "já existe um usuário com este email",
+  "old-password-is-needed": "senha antiga é necessária para redefinir um nova",
+  "old-password-does-not-match": "senha antiga não corresponde",
+  "requested-path-not-found": "caminho solicitado \"{{path}}\" não encontrado",
+  "internal-server-error": "erro interno do servidor",
+  "property-must-be-a-string": "propriedade \"{{property}}\" deve ser um string",
+  "property-must-be-a-int": "propriedade \"{{property}}\" deve ser um int",
+  "property-must-be-uuid-v4": "A propriedade \"{{property}}\" deve ser no padrão UUID v4",
+  "property-must-be-a-email": "\"{{property}}\" propriedade deve ser um email",
+  "property-must-be-a-boolean": "\"{{property}}\" propriedade deve ser um boolean",
+  "property-must-be-a-lenght-limit": "propriedade \"{{property}}\" deve ter um comprimento entre 8 e 16 caracteres",
+  "property-is-required": "propriedade \"{{property}}\" é obrigatória"
+}
