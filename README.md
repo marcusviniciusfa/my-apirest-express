@@ -22,9 +22,10 @@ Exemplo de API utilizando o framework Express.js, construída com base no curso 
 
 5. `npm run dev` inicie o servidor
 
-6. faça o login com o usuário admin à partir de uma requisição na rota `/users/login`, enviando o email e o password. Você receberá o token de acesso
+6. faça o login com o usuário admin à partir de uma requisição `POST` na rota `/users/login`, enviando o email e o password. Você receberá o token de acesso no response e um cookie `refresh-token` contento o token de atualização
 
 ~~~json
+// POST
 {
 	"email": "user.admin@email.com",
 	"password": "12345678"
@@ -32,6 +33,20 @@ Exemplo de API utilizando o framework Express.js, construída com base no curso 
 ~~~
 
 7. agora, antes de fazer as demais requisições basta adicionar ao Header o campo `Authorization` com o valor `Bearer + expaço + token de acesso`
+
+8. após expirar o token de acesso, utilize o token de atualização para gerar um novo token de acesso. Para isso, faça uma requisição `POST` na rota `/users/login/refresh` enviando o cookie `refresh-token` no header `Cookie`. Você receberá um novo token de acesso e um novo token de atualização via cookies
+
+~~~js
+// axios config example
+const options = {
+  method: 'POST',
+  url: 'http://localhost:3000/api/v1/users/login/refresh',
+  headers: {
+    Cookie: 'refresh-token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2NzcwOTQzMDcsImV4cCI6MTY3NzA5NzkwNywiYXVkIjoidXJuOmNsaWVudDphdWRpZW5jZTpyZWZyZXNoIiwiaXNzIjoidXJuOm15LWFwaS1leHByZXNzOmlzc3VlcjpyZWZyZXNoIn0.qAB6RtnKCdkGfMKh9fjM5bvM9hBwSejEO8FuxhvWVQ8; Expires=Wed, 22 Feb 2023 17:31:47 GMT; Path=/; Secure; HttpOnly; Domain=localhost',
+    'Content-Type': 'application/json'
+  },
+}
+~~~
 
 ## Documentação da API (Swagger)
 
