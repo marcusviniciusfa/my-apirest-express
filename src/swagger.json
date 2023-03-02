@@ -163,13 +163,13 @@
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "status": {
-                      "type": "string",
-                      "default": "error"
+                    "statusCode": {
+                      "type": "number",
+                      "default": 400
                     },
-                    "message": {
+                    "error": {
                       "type": "string",
-                      "default": "data/id must match pattern \"^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$\" ❌"
+                      "default": "\"param/id\" property must be in standard UUID v4 ❌"
                     }
                   }
                 }
@@ -230,13 +230,13 @@
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "status": {
-                      "type": "string",
-                      "default": "error"
+                    "statusCode": {
+                      "type": "number",
+                      "default": 400
                     },
-                    "message": {
+                    "error": {
                       "type": "string",
-                      "default": "data/id must match pattern \"^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$\" ❌"
+                      "default": "\"param/id\" property must be in standard UUID v4 ❌"
                     }
                   }
                 }
@@ -281,13 +281,13 @@
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "status": {
-                      "type": "string",
-                      "example": "error"
+                    "statusCode": {
+                      "type": "number",
+                      "example": 400
                     },
-                    "message": {
+                    "error": {
                       "type": "string",
-                      "example": "data/id must match pattern \"^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$\" ❌"
+                      "example": "\"param/id\" property must be in standard UUID v4 ❌"
                     }
                   }
                 }
@@ -496,13 +496,13 @@
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "status": {
-                      "type": "string",
-                      "default": "error"
+                    "statusCode": {
+                      "type": "number",
+                      "default": 400
                     },
-                    "message": {
+                    "error": {
                       "type": "string",
-                      "default": "data/id must match pattern \"^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$\" ❌"
+                      "default": "\"param/id\" property must be in standard UUID v4 ❌"
                     }
                   }
                 }
@@ -576,11 +576,11 @@
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "status": {
-                      "type": "string",
-                      "default": "error"
+                    "statusCode": {
+                      "type": "number",
+                      "default": 400
                     },
-                    "message": {
+                    "error": {
                       "type": "string",
                       "default": "old password does not match ❌"
                     }
@@ -664,13 +664,13 @@
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "status": {
-                      "type": "string",
-                      "default": "error"
+                    "statusCode": {
+                      "type": "number",
+                      "default": 400
                     },
-                    "message": {
+                    "error": {
                       "type": "string",
-                      "default": "data/email must match pattern \"^[^@ \t\r\n]+@[^@ \t\r\n]+.[^@ \t\r\n]+$\" ❌"
+                      "default": "\"body/email\" property must be a email ❌"
                     }
                   }
                 }
@@ -684,11 +684,11 @@
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "status": {
-                      "type": "string",
-                      "default": "error"
+                    "statusCode": {
+                      "type": "number",
+                      "default": 401
                     },
-                    "message": {
+                    "error": {
                       "type": "string",
                       "default": "incorrect email/password combination 🔒"
                     }
@@ -744,26 +744,6 @@
               }
             }
           },
-          "400": {
-            "description": "Bad request",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "status": {
-                      "type": "string",
-                      "default": "error"
-                    },
-                    "message": {
-                      "type": "string",
-                      "default": "data/email must match pattern \"^[^@ \t\r\n]+@[^@ \t\r\n]+.[^@ \t\r\n]+$\" ❌"
-                    }
-                  }
-                }
-              }
-            }
-          },
           "401": {
             "description": "Unauthorized",
             "content": {
@@ -771,11 +751,11 @@
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "status": {
-                      "type": "string",
-                      "default": "error"
+                    "statusCode": {
+                      "type": "number",
+                      "default": 401
                     },
-                    "message": {
+                    "error": {
                       "type": "string",
                       "default": "incorrect email/password combination 🔒"
                     }
@@ -840,11 +820,11 @@
             "schema": {
               "type": "object",
               "properties": {
-                "status": {
-                  "type": "string",
-                  "default": "error"
+                "statusCode": {
+                  "type": "number",
+                  "default": 400
                 },
-                "message": {
+                "error": {
                   "type": "string",
                   "default": "role already exists ❌"
                 }
@@ -860,11 +840,11 @@
             "schema": {
               "type": "object",
               "properties": {
-                "status": {
-                  "type": "string",
-                  "default": "error"
+                "statusCode": {
+                  "type": "number",
+                  "default": 400
                 },
-                "message": {
+                "error": {
                   "type": "string",
                   "default": "user already exists ❌"
                 }
@@ -880,11 +860,11 @@
             "schema": {
               "type": "object",
               "properties": {
-                "status": {
-                  "type": "string",
-                  "default": "error"
+                "statusCode": {
+                  "type": "number",
+                  "default": 401
                 },
-                "message": {
+                "error": {
                   "type": "string",
                   "default": "unauthenticated user 🔒"
                 }
@@ -900,11 +880,11 @@
               "schema": {
                 "type": "object",
                 "properties": {
-                  "status": {
-                    "type": "string",
-                    "default": "error"
+                  "statusCode": {
+                    "type": "number",
+                    "default": 404
                   },
-                  "message": {
+                  "error": {
                     "type": "string",
                     "default": "role not found 🔎"
                   }
@@ -920,11 +900,11 @@
               "schema": {
                 "type": "object",
                 "properties": {
-                  "status": {
-                    "type": "string",
-                    "default": "error"
+                  "statusCode": {
+                    "type": "number",
+                    "default": 404
                   },
-                  "message": {
+                  "error": {
                     "type": "string",
                     "default": "user not found 🔎"
                   }
@@ -940,11 +920,11 @@
             "schema": {
               "type": "object",
               "properties": {
-                "status": {
-                  "type": "string",
-                  "default": "error"
+                "statusCode": {
+                  "type": "number",
+                  "default": 500
                 },
-                "message": {
+                "error": {
                   "type": "string",
                   "default": "internal server error 💥"
                 }

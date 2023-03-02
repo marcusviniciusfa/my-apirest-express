@@ -7,7 +7,7 @@ const options: InitOptions = {
   lng: 'en',
   fallbackLng: 'en',
   preload: ['en', 'pt-br'],
-  ns: ['translations'],
+  ns: ['errorMessages'],
   lowerCaseLng: true,
   interpolation: { escapeValue: false },
 }

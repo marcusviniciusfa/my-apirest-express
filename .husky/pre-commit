@@ -3,4 +3,4 @@
 
 npm run lint
 npm test
-./scripts/remove_to_stage_area.sh db.sqlite
+./scripts/remove_from_stage_area.sh db.sqlite
