@@ -1,6 +1,14 @@
 # My API Express
 
-Exemplo de API utilizando o framework Express, construída com base no curso [Iniciando no desenvolvimento de API Node.js com Typescript](https://www.udemy.com/course/primeiros-passos-nodejs-typescript/) do professor [Jorge Aluizio](https://www.linkedin.com/in/jorgealuizio/)
+Exemplo de API utilizando o framework Express.js, construída com base no curso [Iniciando no desenvolvimento de API Node.js com Typescript](https://www.udemy.com/course/primeiros-passos-nodejs-typescript/) do professor [Jorge Aluizio](https://www.linkedin.com/in/jorgealuizio/)
+
+## Sumário
+
+1. [Executando](#executando)
+2. [Documentação da API (Swagger)](#documentação-da-api-swagger)
+3. [Tópicos cobertos pelo projeto base](#tópicos-cobertos-pelo-projeto-base)
+4. [Tópicos extras (complementares ao projeto base)](#tópicos-extras-complemento-ao-projeto-base)
+5. [Anotações](#anotações)
 
 ## Executando
 
@@ -14,7 +22,7 @@ Exemplo de API utilizando o framework Express, construída com base no curso [In
 
 5. `npm run dev` inicie o servidor
 
-6. faça o login com o usuário admin à partir de uma requisição na rota `/users/login`, enviando o email e o password do usuário admin. Você vai receber o token de acesso
+6. faça o login com o usuário admin à partir de uma requisição na rota `/users/login`, enviando o email e o password. Você receberá o token de acesso
 
 ~~~json
 {
@@ -23,14 +31,14 @@ Exemplo de API utilizando o framework Express, construída com base no curso [In
 }
 ~~~
 
-7. agora, antes de fazer as demais requisições basta adicionar ao Header o campo `Authorization` com o valor `Bearer + expaço + token`
+7. agora, antes de fazer as demais requisições basta adicionar ao Header o campo `Authorization` com o valor `Bearer + expaço + token de acesso`
 
-## Documentação da API
+## Documentação da API (Swagger)
 
 - `npm run dev` inicie o servidor
 - http://localhost:3000/api/v1/docs acesse a documentação no browser
 
-## Tópicos cobertos pelo curso
+## Tópicos cobertos pelo projeto base
 
 - [x] API Restful NodeJS com ExpressJS e TypeScript
 - [x] [TypeORM](https://typeorm.io/) para bancos de dados relacional
@@ -39,14 +47,13 @@ Exemplo de API utilizando o framework Express, construída com base no curso [In
 - [x] Upload local de imagens com [Multer](https://github.com/expressjs/multer/blob/master/doc/README-pt-br.md)
 - [x] Autenticação com token de acesso Json Web Token (JWT) e Refresh Token
 
-## Tópicos extras (complemento ao curso)
+## Tópicos extras (complemento ao projeto base)
 
 - [x] Validação dos dados recebidos pela API usando o [express-validator](https://express-validator.github.io/docs)
 - [x] Middleware de tratamento de erros personalizado
 - [x] Seeds para popular uma tabela do banco de dados utilizando o módulo [typeorm-extension](https://typeorm-extension.tada5hi.net/guide/seeding.html) (recomendado pelo [TypeORM](https://typeorm.io/#extensions))
 - [x] Implementação de access token e refresh token seguindo o artigo ["Usando Tokens JWT de forma Segura"](https://blog.lsantos.dev/jwt-seguro/), escrito por Lucas Santos
 - [x] Tradução de mensagens de erro com [i18n](https://www.i18next.com/)
-- [ ] Tradução da documentação Swagger
 - [ ] Testes unitários e end-to-end com [Jest](https://jestjs.io/pt-BR/)
 - [ ] Salvar Refresh Token em banco de dados [Redis](https://redis.io/) (para ter um melhor desempenho ao invalidar Refresh Tokens antigos)
 - [ ] Salvar avatar no [Simple Storage Service (S3) da AWS](https://aws.amazon.com/pt/s3/)
