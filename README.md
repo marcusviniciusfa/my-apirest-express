@@ -1,4 +1,4 @@
-# My API Express
+# My API REST Express
 
 Exemplo de API utilizando o framework Express.js, construída com base no curso [Iniciando no desenvolvimento de API Node.js com Typescript](https://www.udemy.com/course/primeiros-passos-nodejs-typescript/) do professor [Jorge Aluizio](https://www.linkedin.com/in/jorgealuizio/)
 
